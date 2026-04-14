@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhavani Mart | Karmanghat's Mega Supermarket</title>
+    <title>Bhavani Mart | 3000 Sq.Ft Mega Supermarket</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
     <style>
-        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-size: cover; background-position: center; }
-        .brand-yellow { color: #FFD700; }
+        .hero-gradient { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1350&q=80'); background-size: cover; }
         .bg-brand-blue { background-color: #003366; }
+        .sticky-search { position: sticky; top: 64px; z-index: 40; }
+        .product-card:hover { transform: translateY(-5px); border-color: #FFD700; }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -17,92 +18,130 @@
     <nav class="bg-brand-blue text-white p-4 sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-2xl font-bold tracking-tighter">BHAVANI <span class="text-yellow-400">MART</span></h1>
-            <div class="hidden md:flex space-x-6">
-                <a href="#home" class="hover:text-yellow-400">Home</a>
-                <a href="#upload" class="hover:text-yellow-400">Upload List</a>
-                <a href="#categories" class="hover:text-yellow-400">Categories</a>
-                <a href="#contact" class="hover:text-yellow-400">Find Us</a>
-            </div>
             <a href="https://wa.me/91XXXXXXXXXX" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-full text-sm font-bold shadow-md transition">
-                <i class="fab fa-whatsapp"></i> Chat Now
+                <i class="fab fa-whatsapp"></i> Order Now
             </a>
         </div>
     </nav>
 
-    <header id="home" class="hero-gradient h-[500px] flex items-center justify-center text-center text-white px-4">
+    <header class="hero-gradient h-[250px] flex items-center justify-center text-center text-white px-4">
         <div>
-            <h2 class="text-4xl md:text-6xl font-extrabold mb-4">3,000 Sq. Ft. of Freshness!</h2>
-            <p class="text-xl mb-8 text-gray-200">Karmanghat's Biggest Supermarket Near Pochamma Temple</p>
-            <a href="#upload" class="bg-yellow-400 text-blue-900 px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-300 transition duration-300">Start Shopping</a>
+            <h2 class="text-4xl font-extrabold mb-2 text-yellow-400">BHAVANI HYPER MART</h2>
+            <p class="text-lg uppercase tracking-widest">Karmanghat's Biggest 3000 Sq. Ft. Store</p>
+            <p class="mt-2 text-sm italic">Near Pochamma Temple, Hyderabad</p>
         </div>
     </header>
 
-    <section id="upload" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto bg-blue-50 rounded-3xl p-8 md:p-12 shadow-xl border-2 border-dashed border-blue-200">
-                <div class="text-center mb-10">
-                    <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-widest">Exclusive Service</span>
-                    <h2 class="text-3xl font-bold text-blue-900 mt-4">Tired of Searching? Just Upload Your List!</h2>
-                    <p class="text-gray-600 mt-2 text-lg">Photo your handwritten list—we pack, you relax.</p>
-                </div>
-                
-                <div class="flex flex-col items-center">
-                    <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue-600 hover:text-white transition duration-200">
-                        <i class="fas fa-camera text-3xl"></i>
-                        <span class="mt-2 text-base leading-normal">Select Image of List</span>
-                        <input type='file' class="hidden" />
-                    </label>
-                    <button class="mt-6 w-full md:w-64 bg-green-500 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-green-600 transition">
-                        Submit to Store WhatsApp
-                    </button>
-                    <p class="text-xs text-gray-400 mt-4 italic">*Delivery within 30-45 mins in Karmanghat area</p>
-                </div>
-            </div>
+    <div class="bg-white shadow-md p-4 sticky-search">
+        <div class="container mx-auto flex flex-col md:flex-row gap-4">
+            <input type="text" id="itemSearch" onkeyup="filterItems()" placeholder="Search 10,000+ items (e.g. Rice, Dal, Soap)..." class="flex-grow p-3 border-2 border-blue-100 rounded-xl focus:border-blue-500 outline-none">
+            <select id="categoryFilter" onchange="filterItems()" class="p-3 border-2 border-blue-100 rounded-xl bg-white font-bold text-blue-900">
+                <option value="all">All Categories</option>
+                <option value="KITCHEN">Kitchen</option>
+                <option value="SPICES">Spices</option>
+                <option value="DRINKS">Drinks</option>
+                <option value="DAIRY">Dairy</option>
+                <option value="LEGUMES">Legumes</option>
+                <option value="STATIONERY">Stationery</option>
+                <option value="PERSONAL CARE">Personal Care</option>
+                <option value="CLEANING PRODUCTS">Cleaning Products</option>
+            </select>
+        </div>
+    </div>
+
+    <section class="py-6 bg-yellow-400 text-blue-900">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="font-bold text-lg mb-2">Tired of typing? Take a photo of your list!</h3>
+            <a href="https://wa.me/91XXXXXXXXXX?text=Hi, I am sending my grocery list photo" class="inline-block bg-blue-900 text-white px-6 py-2 rounded-lg font-bold">
+                <i class="fas fa-upload mr-2"></i> WhatsApp List Photo
+            </a>
         </div>
     </section>
 
-    <section id="categories" class="py-16 container mx-auto px-4">
-        <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Huge Variety, Wholesale Prices</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition text-center border-b-4 border-yellow-400">
-                <i class="fas fa-seedling text-4xl text-green-500 mb-4"></i>
-                <h4 class="font-bold">Fresh Produce</h4>
+    <section class="py-10 container mx-auto px-4">
+        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition text-center border-b-4 border-blue-400">
-                <i class="fas fa-mortar-pestle text-4xl text-orange-500 mb-4"></i>
-                <h4 class="font-bold">Grains & Spices</h4>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition text-center border-b-4 border-red-400">
-                <i class="fas fa-broom text-4xl text-purple-500 mb-4"></i>
-                <h4 class="font-bold">Household Needs</h4>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition text-center border-b-4 border-pink-400">
-                <i class="fas fa-om text-4xl text-pink-500 mb-4"></i>
-                <h4 class="font-bold">Puja Essentials</h4>
-            </div>
-        </div>
     </section>
 
-    <section id="contact" class="py-16 bg-gray-100">
-        <div class="container mx-auto px-4 grid md:grid-cols-2 gap-10 items-center">
-            <div>
-                <h3 class="text-3xl font-bold mb-6">Visit Bhavani Mart</h3>
-                <p class="text-lg text-gray-700 mb-4"><i class="fas fa-map-marker-alt text-red-500 mr-2"></i> Near Pochamma Temple Area, Karmanghat, Hyderabad.</p>
-                <p class="text-lg text-gray-700 mb-4"><i class="fas fa-clock text-blue-500 mr-2"></i> Open 7:00 AM - 10:00 PM</p>
-                <div class="flex space-x-4 mt-6">
-                    <a href="#" class="text-3xl text-pink-600"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-3xl text-red-600"><i class="fab fa-youtube"></i></a>
+    <script>
+        const products = [
+            { category: "KITCHEN", item: "NAPKINS", price: "" },
+            { category: "KITCHEN", item: "NON STICK SPRAY", price: "" },
+            { category: "KITCHEN", item: "WAX PAPER", price: "" },
+            { category: "KITCHEN", item: "ALUMINUM FOIL", price: "" },
+            { category: "KITCHEN", item: "PAPER TOWELS", price: "" },
+            { category: "SPICES", item: "CUMIN SEEDS", price: "" },
+            { category: "SPICES", item: "NUTMEG (JAIPHAL)", price: "" },
+            { category: "SPICES", item: "MACE (JAVITRI)", price: "" },
+            { category: "SPICES", item: "BAY LEAVES (TEJ PATTA)", price: "" },
+            { category: "SPICES", item: "BLACK MUSTARD", price: "" },
+            { category: "DRINKS", item: "SODA", price: "" },
+            { category: "DRINKS", item: "WATER", price: "" },
+            { category: "DRINKS", item: "JUICE", price: "" },
+            { category: "DRINKS", item: "COFFEE", price: "" },
+            { category: "DAIRY", item: "BUTTER", price: "" },
+            { category: "DAIRY", item: "CHEESE", price: "" },
+            { category: "DAIRY", item: "MILK", price: "" },
+            { category: "DAIRY", item: "YOGURT", price: "" },
+            { category: "DAIRY", item: "SOUR CREAM", price: "" },
+            { category: "LEGUMES", item: "TOOR DAL", price: "" },
+            { category: "LEGUMES", item: "MASOOR DAL", price: "" },
+            { category: "LEGUMES", item: "RAJMA", price: "" },
+            { category: "LEGUMES", item: "PEANUTS", price: "" },
+            { category: "LEGUMES", item: "URAD DAL", price: "" },
+            { category: "LEGUMES", item: "MOONG DAL", price: "" },
+            { category: "LEGUMES", item: "CHANA DAL", price: "" },
+            { category: "STATIONERY", item: "FILES", price: "" },
+            { category: "STATIONERY", item: "MARKER", price: "" },
+            { category: "STATIONERY", item: "PENS", price: "" },
+            { category: "STATIONERY", item: "PENCILS", price: "" },
+            { category: "STATIONERY", item: "PRINTER PAPER", price: "" },
+            { category: "STATIONERY", item: "GLUE", price: "" },
+            { category: "STATIONERY", item: "TAPE", price: "" },
+            { category: "PERSONAL CARE", item: "SOAP", price: "" },
+            { category: "PERSONAL CARE", item: "SHAMPOO", price: "" },
+            { category: "PERSONAL CARE", item: "TOOTHPASTE", price: "" },
+            { category: "PERSONAL CARE", item: "RAZORS", price: "" },
+            { category: "PERSONAL CARE", item: "HAIR GEL", price: "" },
+            { category: "PERSONAL CARE", item: "FACIAL CLEANSER", price: "" },
+            { category: "PERSONAL CARE", item: "SHAVING CREAM", price: "" },
+            { category: "CLEANING PRODUCTS", item: "AIR FRESHENER", price: "" },
+            { category: "CLEANING PRODUCTS", item: "BATHROOM CLEANER", price: "" },
+            { category: "CLEANING PRODUCTS", item: "DETERGENT", price: "" },
+            { category: "CLEANING PRODUCTS", item: "DISH SOAP", price: "" },
+            { category: "CLEANING PRODUCTS", item: "GARBAGE BAGS", price: "" },
+            { category: "CLEANING PRODUCTS", item: "GLASS CLEANER", price: "" },
+            { category: "CLEANING PRODUCTS", item: "SCRUBBERS", price: "" }
+        ];
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            const whatsappNumber = "+919182841682"; // REPLACE WITH YOUR BROTHER'S NUMBER
+            
+            grid.innerHTML = items.map(p => `
+                <div class="bg-white p-4 rounded-xl shadow-sm border-2 border-transparent transition product-card flex flex-col justify-between">
+                    <div>
+                        <div class="text-[10px] font-bold text-blue-500 uppercase">${p.category}</div>
+                        <h4 class="font-bold text-gray-800 text-sm md:text-base leading-tight mt-1">${p.item}</h4>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-green-600 font-bold text-sm mb-2">${p.price || 'Price: Ask Store'}</div>
+                        <a href="https://wa.me/${whatsappNumber}?text=Price check for ${p.item}" class="block text-center text-xs bg-blue-50 text-blue-600 py-1 rounded-md border border-blue-100">
+                            Check Price
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-gray-300 h-64 rounded-2xl flex items-center justify-center shadow-inner">
-                <span class="text-gray-500 font-bold">[Google Maps Will Load Here]</span>
-            </div>
-        </div>
-    </section>
+            `).join('');
+        }
 
-    <footer class="bg-brand-blue text-white py-8 text-center">
-        <p>&copy; 2026 Bhavani Mart. Designed for Family Success.</p>
-    </footer>
+        function filterItems() {
+            const search = document.getElementById('itemSearch').value.toLowerCase();
+            const cat = document.getElementById('categoryFilter').value;
+            const filtered = products.filter(p => (cat === 'all' || p.category === cat) && p.item.toLowerCase().includes(search));
+            renderProducts(filtered);
+        }
 
+        renderProducts(products);
+    </script>
 </body>
 </html>
