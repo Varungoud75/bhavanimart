@@ -3,58 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhavani Mart | Official Catalog</title>
+    <title>Bhavani Mart | Wholesale Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Outfit', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Outfit', sans-serif; background-color: #f0f4f8; }
         .bg-navy { background-color: #003366; }
+        .text-gold { color: #FFD700; }
+        .bg-gold { background-color: #FFD700; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .hero-section { 
-            background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80'); 
+        .hero-banner { 
+            background: linear-gradient(rgba(0,51,102,0.75), rgba(0,51,102,0.75)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80'); 
             background-size: cover; background-position: center;
         }
+        .product-card { border-top: 4px solid #FFD700; }
     </style>
 </head>
 <body>
 
-    <nav class="bg-white p-4 sticky top-0 z-50 shadow-md border-b flex justify-between items-center">
+    <div class="bg-red-600 text-white py-2 text-center text-[11px] font-black uppercase tracking-[0.2em] shadow-inner">
+        🔥 SPECIAL DISCOUNT ON EVERY ITEM IN STORE • BELOW MRP 🔥
+    </div>
+
+    <nav class="bg-navy p-4 sticky top-0 z-50 shadow-xl flex justify-between items-center border-b border-blue-800">
         <div>
-            <h1 class="text-2xl font-black text-[#003366] leading-none tracking-tighter uppercase italic">BHAVANI<span class="text-orange-500">MART</span></h1>
-            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Karmanghat</p>
+            <h1 class="text-xl font-black text-gold leading-none uppercase italic tracking-tighter">BHAVANI<span class="text-white">MART</span></h1>
+            <p class="text-[9px] font-bold text-blue-200 uppercase tracking-widest">Karmanghat • Wholesale</p>
         </div>
-        <a href="https://wa.me/919182841682" class="bg-green-600 text-white px-5 py-2 rounded-lg font-black text-[10px] shadow-sm">ORDER NOW</a>
+        <a href="https://wa.me/919182841682" class="bg-green-500 text-white px-5 py-2 rounded-lg font-black text-[10px] shadow-lg">ORDER NOW</a>
     </nav>
 
-    <section class="hero-section py-10 text-center text-white">
-        <h2 class="text-3xl font-black text-yellow-400 uppercase">Store Inventory</h2>
-        <p class="text-[10px] font-bold tracking-[0.2em] opacity-80 uppercase mt-1">Wholesale Prices • 3000 Sq. Ft. Store</p>
+    <section class="hero-banner py-14 text-center text-white px-4 border-b-4 border-gold">
+        <h2 class="text-3xl font-black text-gold uppercase leading-tight">BHAVANI HYPER MART</h2>
+        <p class="text-xs font-bold tracking-[0.3em] opacity-90 uppercase mt-1">3000 Sq. Ft. Wholesale Store</p>
     </section>
 
-    <div class="bg-white sticky top-[68px] z-40 border-b shadow-sm">
-        <div class="p-4 max-w-xl mx-auto">
-            <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search items (Rice, Soap, Pen)..." class="w-full bg-slate-100 p-3 rounded-xl border-none text-sm outline-none focus:ring-2 focus:ring-blue-100 font-medium">
-        </div>
-        <div class="flex gap-2 px-4 pb-4 overflow-x-auto no-scrollbar" id="catFilters">
-            <button onclick="setCategory('all')" class="bg-[#003366] text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase whitespace-nowrap">All Items</button>
+    <div class="bg-gold p-5 text-center shadow-md">
+        <h3 class="text-navy font-black text-sm mb-3 uppercase italic tracking-tighter">Tired of typing? Take a photo of your list!</h3>
+        <a href="https://wa.me/919182841682?text=I%20am%20sending%20a%20photo%20of%20my%20list" class="bg-navy text-white px-8 py-3 rounded-2xl text-[11px] font-black inline-block shadow-lg active:scale-95 transition-transform">WHATSAPP LIST PHOTO</a>
+    </div>
+
+    <div class="bg-white sticky top-[68px] z-40 border-b shadow-md p-4">
+        <div class="max-w-xl mx-auto">
+            <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search Rice, Oil, Snacks..." class="w-full bg-slate-100 p-4 rounded-2xl border-2 border-slate-100 text-sm mb-4 outline-none focus:border-gold font-medium">
+            <div class="flex gap-2 overflow-x-auto no-scrollbar" id="catFilters">
+                <button onclick="setCategory('all')" class="bg-navy text-gold px-6 py-2 rounded-full text-[10px] font-bold uppercase whitespace-nowrap">All Items</button>
+            </div>
         </div>
     </div>
 
     <main class="container mx-auto p-4 py-8 mb-20">
-        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 text-center">
-            <p class="col-span-full text-slate-400 animate-pulse italic">Updating inventory from store...</p>
+        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5">
+            <p class="col-span-full text-navy font-bold text-center py-20 animate-pulse">Syncing Store Inventory...</p>
         </div>
     </main>
 
-    <footer class="bg-white border-t p-10 text-center">
-        <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-2">Near Pochamma Temple, Karmanghat</p>
-        <p class="text-[11px] font-black text-[#003366] mb-6 tracking-tighter">+91 9182841682</p>
-        <p onclick="checkAdmin()" class="text-[10px] text-slate-200 cursor-pointer">© 2026 Bhavani Mart</p>
+    <footer class="bg-navy text-white p-12 text-center">
+        <p class="text-[10px] text-blue-200 font-bold uppercase tracking-widest mb-2">Narayana Heights, Karmanghat, Hyderabad</p>
+        <p class="text-xl font-black text-gold mb-6 tracking-tighter">+91 9182841682</p>
+        <p class="text-[10px] text-blue-900">© 2026 Bhavani Mart</p>
     </footer>
 
     <script>
-        // PASTE YOUR CSV LINK HERE
-        const sheetUrl = 'https://docs.google.com/spreadsheets/d/15V8TSOW0JcGkVJwrYr0qsTkUDhflKplifdv3d1Tz-zg/edit?usp=sharing';
+        // YOUR LIVE CSV LINK
+        const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQK4lAzDWObCjowN-SuMvzqFpz46ePH4kDCYBrdMCY3A1Uz2pv_ooVR8h2c8JNNpZmKxsSVaq7dDOQc/pub?gid=0&single=true&output=csv';
         
         let allItems = [];
         let activeCat = 'all';
@@ -63,30 +75,28 @@
             try {
                 const res = await fetch(sheetUrl);
                 const data = await res.text();
-                // This logic prevents the code tags from appearing as products
                 const rows = data.split('\n').slice(1);
                 
                 allItems = rows.map(r => {
                     const parts = r.split(',');
                     return { 
                         category: parts[0]?.replace(/"/g, '').trim().toUpperCase(), 
-                        name: parts[1]?.replace(/"/g, '').trim() 
+                        name: parts[1]?.replace(/"/g, '').trim(),
+                        img: parts[2]?.trim() || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'
                     };
-                }).filter(i => i.name && i.name.length > 1 && !i.name.includes('<'));
+                }).filter(i => i.name && i.name.length > 1 && !i.name.includes('<') && !i.name.includes('{'));
 
                 generateCategoryButtons();
                 render();
-            } catch (e) {
-                document.getElementById('productGrid').innerHTML = "Check Google Sheet connection.";
-            }
+            } catch (e) { document.getElementById('productGrid').innerHTML = "Error connecting to store data."; }
         }
 
         function generateCategoryButtons() {
-            const cats = [...new Set(allItems.map(i => i.category))].filter(c => c && c !== "CATEGORY");
+            const cats = [...new Set(allItems.map(i => i.category))].filter(c => c && c !== "CATEGORY" && c.length < 20);
             const container = document.getElementById('catFilters');
             cats.forEach(c => {
                 const btn = document.createElement('button');
-                btn.className = "bg-slate-100 text-slate-600 px-5 py-2 rounded-full text-[10px] font-bold uppercase whitespace-nowrap";
+                btn.className = "bg-slate-50 text-navy border-2 border-slate-200 px-6 py-2 rounded-full text-[10px] font-bold uppercase whitespace-nowrap hover:border-gold transition-colors";
                 btn.innerText = c;
                 btn.onclick = () => setCategory(c);
                 container.appendChild(btn);
@@ -104,20 +114,23 @@
             });
 
             grid.innerHTML = filtered.map(i => `
-                <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flex flex-col justify-between min-h-[140px] relative">
-                    <div class="bg-yellow-400 h-1 absolute top-0 left-0 right-0"></div>
-                    <div>
-                        <p class="text-[7px] font-black text-blue-500 tracking-widest mb-1 uppercase">${i.category}</p>
-                        <h4 class="text-[11px] font-black text-slate-800 uppercase leading-tight">${i.name}</h4>
+                <div class="bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col justify-between product-card relative group">
+                    <div class="absolute top-2 left-2 bg-red-600 text-white text-[7px] font-black px-2 py-1 rounded-full z-10 shadow-md">SPECIAL DISCOUNT</div>
+                    
+                    <div class="h-36 bg-white flex items-center justify-center p-4">
+                        <img src="${i.img}" class="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform" onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'">
                     </div>
-                    <a href="https://wa.me/919182841682?text=Order: ${i.name}" class="mt-4 block bg-slate-50 text-slate-500 py-2 rounded-lg text-[9px] font-black hover:bg-[#003366] hover:text-white transition-all">ORDER NOW</a>
+                    
+                    <div class="p-4 text-center bg-slate-50 border-t border-slate-100">
+                        <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest mb-1">${i.category}</p>
+                        <h4 class="text-[11px] font-black text-navy uppercase leading-tight h-8 overflow-hidden mb-3">${i.name}</h4>
+                        <a href="https://wa.me/919182841682?text=Order: ${i.name}" class="block bg-navy text-gold py-2.5 rounded-xl text-[9px] font-black shadow-md hover:bg-gold hover:text-navy transition-all">ORDER NOW</a>
+                    </div>
                 </div>
             `).join('');
         }
 
         function setCategory(c) { activeCat = c; render(); }
-        function checkAdmin() { if(prompt("Password:") === "mart79") window.open('https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE'); }
-
         loadData();
     </script>
 </body>
