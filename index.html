@@ -3,133 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhavani Mart | Grocery Delivered in Minutes</title>
+    <title>Bhavani Mart | Premium Hypermarket</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
     <style>
-        /* Zepto-inspired Colors */
-        .bg-zepto-purple { background-color: #3c006b; }
-        .text-zepto-purple { color: #3c006b; }
-        .bg-zepto-pink { background-color: #ff3366; }
-        .sticky-search { position: sticky; top: 0; z-index: 50; }
-        .discount-badge { background: linear-gradient(45deg, #ff3366, #ff00cc); }
-        .product-card { border-radius: 16px; transition: all 0.2s ease; }
-        .product-card:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .font-logo { font-family: 'Playfair Display', serif; }
+        .font-main { font-family: 'Montserrat', sans-serif; }
+        .bg-premium-green { background-color: #004d40; }
+        .discount-pulse { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red { 0% { background-color: #e31e24; } 50% { background-color: #ff5252; } 100% { background-color: #e31e24; } }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .admin-panel { display: none; }
     </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-900">
+<body class="bg-gray-50 font-main">
 
-    <div class="bg-zepto-purple text-white py-2 px-4 text-center">
-        <p class="text-[10px] md:text-xs font-bold tracking-tight">
-            <span class="text-yellow-300 italic">OFFER:</span> DISCOUNT ON EVERY MRP ITEM | FREE DELIVERY ABOVE ₹1,000
+    <div class="discount-pulse text-white py-2 text-center text-[11px] font-black uppercase tracking-tighter">
+        🔥🔥 SPECIAL DISCOUNT ON EVERY ITEM IN STORE TODAY! 🔥🔥
+    </div>
+
+    <nav class="bg-white p-5 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-logo text-premium-green italic leading-none">Bhavani</h1>
+                <h2 class="text-xl font-main text-red-600 font-black tracking-[.25em] -mt-1">MART</h2>
+            </div>
+            <a href="https://wa.me/919182841682" class="bg-green-600 text-white px-4 py-2 rounded-lg font-black text-xs flex items-center gap-2 shadow-lg">
+                <i class="fab fa-whatsapp text-lg"></i> ORDER
+            </a>
+        </div>
+    </nav>
+
+    <div class="bg-premium-green p-4">
+        <div class="container mx-auto">
+            <p class="text-white text-[10px] text-center mb-3 opacity-80 uppercase tracking-widest font-bold">Karmanghat • H NO 8-1-12/G1 • Near Pochamma Temple</p>
+            <div class="relative max-w-xl mx-auto">
+                <input type="text" id="itemSearch" onkeyup="filterItems()" placeholder="Search 10,000+ Products..." class="w-full p-4 rounded-full border-none shadow-inner text-sm focus:ring-4 focus:ring-yellow-400">
+                <i class="fas fa-search absolute right-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-yellow-100 p-3 border-b border-yellow-200">
+        <p class="text-center text-xs font-black text-yellow-800">
+            <i class="fas fa-truck-fast mr-2"></i> FREE HOME DELIVERY (ORDERS > ₹1000)
         </p>
     </div>
 
-    <header class="bg-white p-4 shadow-sm border-b">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-zepto-purple text-white w-10 h-10 rounded-xl flex items-center justify-center font-black text-xl italic shadow-md">B</div>
-                <div>
-                    <h1 class="text-xl font-black text-zepto-purple tracking-tighter leading-none italic">BHAVANI MART</h1>
-                    <p class="text-[9px] font-bold text-gray-400 mt-1 uppercase">Karmanghat • H NO 8-1-12/G1</p>
+    <div class="bg-white py-4 overflow-x-auto whitespace-nowrap px-4 no-scrollbar border-b">
+        <div class="flex gap-2">
+            <button onclick="setCategory('all')" class="bg-black text-white px-5 py-2 rounded-full text-[10px] font-black uppercase">All</button>
+            <button onclick="setCategory('GROCERY')" class="bg-gray-100 text-gray-800 px-5 py-2 rounded-full text-[10px] font-black uppercase">Grocery</button>
+            <button onclick="setCategory('SPICES')" class="bg-gray-100 text-gray-800 px-5 py-2 rounded-full text-[10px] font-black uppercase">Spices</button>
+            <button onclick="setCategory('CLEANING')" class="bg-gray-100 text-gray-800 px-5 py-2 rounded-full text-[10px] font-black uppercase">Cleaning</button>
+        </div>
+    </div>
+
+    <main class="container mx-auto p-4 mb-20">
+        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            </div>
+    </main>
+
+    <footer class="bg-white border-t p-10">
+        <div class="container mx-auto text-center">
+            <button onclick="showAdmin()" class="text-[10px] text-gray-300 uppercase tracking-widest font-bold hover:text-premium-green">Store Manager Login</button>
+            
+            <div id="adminArea" class="admin-panel mt-5 bg-gray-100 p-6 rounded-2xl border-2 border-dashed border-gray-300">
+                <h3 class="font-black mb-4">Add New Product</h3>
+                <div class="flex flex-col gap-3 max-w-xs mx-auto">
+                    <input type="text" id="newProdName" placeholder="Item Name (e.g. Sugar)" class="p-2 rounded border">
+                    <select id="newProdCat" class="p-2 rounded border">
+                        <option value="GROCERY">Grocery</option>
+                        <option value="SPICES">Spices</option>
+                        <option value="CLEANING">Cleaning</option>
+                    </select>
+                    <button onclick="addProduct()" class="bg-premium-green text-white p-3 rounded font-black">SAVE TO LIST</button>
                 </div>
             </div>
-            <a href="https://wa.me/919182841682" class="bg-zepto-pink text-white px-4 py-2 rounded-full font-black text-[10px] shadow-lg animate-pulse">
-                ORDER NOW
-            </a>
-        </div>
-    </header>
-
-    <div class="bg-white p-4 sticky-search border-b shadow-sm">
-        <div class="container mx-auto relative">
-            <input type="text" id="itemSearch" onkeyup="filterItems()" placeholder="Search for 'Rice', 'Milk' or 'Soap'..." class="w-full bg-gray-100 p-3 pl-10 rounded-xl outline-none focus:ring-2 focus:ring-purple-200 text-sm border border-gray-100">
-            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-        </div>
-    </div>
-
-    <div class="bg-white py-4 overflow-x-auto whitespace-nowrap px-4 border-b no-scrollbar">
-        <div class="container mx-auto flex gap-4">
-            <button onclick="setCategory('all')" class="bg-zepto-purple text-white px-4 py-2 rounded-full text-xs font-bold">All</button>
-            <button onclick="setCategory('LEGUMES')" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full text-xs font-bold">Dals</button>
-            <button onclick="setCategory('SPICES')" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full text-xs font-bold">Spices</button>
-            <button onclick="setCategory('DAIRY')" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full text-xs font-bold">Dairy</button>
-            <button onclick="setCategory('CLEANING PRODUCTS')" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-full text-xs font-bold">Cleaning</button>
-        </div>
-    </div>
-
-    <section class="py-6 container mx-auto px-4">
-        <h3 class="text-lg font-black mb-4 flex items-center gap-2">
-            <i class="fas fa-bolt text-yellow-500"></i> Deals for You
-        </h3>
-        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            
+            <div class="mt-10 text-gray-400 text-[10px]">
+                BHAVANI HYPER MART © 2026 | HYDERABAD
             </div>
-    </section>
-
-    <footer class="bg-white mt-10 p-8 border-t">
-        <div class="container mx-auto text-center">
-            <div class="bg-gray-50 p-6 rounded-3xl border border-gray-100 inline-block max-w-sm w-full">
-                <h4 class="font-black text-zepto-purple mb-2">BHAVANI HYPER MART</h4>
-                <p class="text-xs text-gray-500 leading-relaxed mb-4">
-                    Narayana Heights, Kranthi Nagar, <br>
-                    Karmanghat, Hyderabad - 500079
-                </p>
-                <a href="tel:+919182841682" class="text-zepto-purple font-black block border-t pt-4">
-                    <i class="fas fa-phone-alt mr-2"></i> +91 9182841682
-                </a>
-            </div>
-            <p class="mt-8 text-[9px] text-gray-400 font-bold uppercase tracking-widest">&copy; 2026 Bhavani Mart Hypermarket</p>
         </div>
     </footer>
 
     <script>
         const whatsappNumber = "919182841682";
-        let currentCategory = 'all';
-
-        const products = [
-            { category: "LEGUMES", item: "TOOR DAL" }, { category: "LEGUMES", item: "MASOOR DAL" },
-            { category: "LEGUMES", item: "CHANA DAL" }, { category: "LEGUMES", item: "URAD DAL" },
-            { category: "SPICES", item: "CUMIN SEEDS" }, { category: "SPICES", item: "BLACK MUSTARD" },
-            { category: "DAIRY", item: "MILK" }, { category: "DAIRY", item: "BUTTER" },
-            { category: "DAIRY", item: "CHEESE" }, { category: "KITCHEN", item: "NAPKINS" },
-            { category: "KITCHEN", item: "ALUMINUM FOIL" }, { category: "PERSONAL CARE", item: "SOAP" },
-            { category: "PERSONAL CARE", item: "SHAMPOO" }, { category: "CLEANING PRODUCTS", item: "DETERGENT" }
-            // Add other items here...
+        let products = [
+            { category: "GROCERY", item: "TOOR DAL" },
+            { category: "GROCERY", item: "RICE 25KG" },
+            { category: "SPICES", item: "CUMIN SEEDS" },
+            { category: "CLEANING", item: "DISH SOAP" }
         ];
 
         function renderProducts(items) {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = items.map(p => `
-                <div class="bg-white p-3 product-card shadow-sm border border-gray-100 flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute top-0 right-0 discount-badge text-[8px] text-white px-2 py-1 font-black rounded-bl-lg">OFFER</div>
-                    <div class="h-24 bg-gray-50 rounded-xl mb-3 flex items-center justify-center text-gray-200">
-                        <i class="fas fa-box-open text-3xl"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-[11px] font-bold text-gray-800 leading-tight h-8 overflow-hidden uppercase">${p.item}</h4>
-                        <p class="text-[10px] text-gray-400 font-bold mt-1">${p.category}</p>
-                    </div>
-                    <div class="mt-3 flex justify-between items-center">
-                        <div>
-                            <p class="text-[8px] text-gray-400 line-through">MRP ₹00</p>
-                            <p class="text-xs font-black text-zepto-purple">LOWER PRICE</p>
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between">
+                    <div class="bg-yellow-400 text-[8px] font-black p-1 text-center uppercase tracking-tighter">SPECIAL DISCOUNTED PRICE</div>
+                    <div class="p-4 flex-grow flex flex-col items-center justify-center">
+                        <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-3 text-gray-200">
+                            <i class="fas fa-shopping-bag text-2xl"></i>
                         </div>
-                        <a href="https://wa.me/${whatsappNumber}?text=Price%20check%20for%20${p.item}" class="bg-white border border-zepto-pink text-zepto-pink px-3 py-1 rounded-lg text-[10px] font-black hover:bg-zepto-pink hover:text-white transition">
-                            ADD
-                        </a>
+                        <h4 class="text-xs font-black text-gray-800 text-center uppercase">${p.item}</h4>
+                        <span class="text-[9px] text-gray-400 font-bold">${p.category}</span>
+                    </div>
+                    <div class="p-3 bg-gray-50 border-t flex justify-between items-center">
+                        <span class="text-[10px] font-black text-red-600">BELOW MRP</span>
+                        <a href="https://wa.me/${whatsappNumber}?text=Price%20check%20for%20${p.item}" class="bg-white border-2 border-premium-green text-premium-green px-3 py-1 rounded-md text-[10px] font-black">ADD</a>
                     </div>
                 </div>
             `).join('');
         }
 
-        function setCategory(cat) {
-            currentCategory = cat;
-            filterItems();
+        function showAdmin() {
+            const pass = prompt("Enter Manager Password:");
+            if(pass === "mart79") {
+                document.getElementById('adminArea').style.display = "block";
+                alert("Login Success! You can now add products below.");
+            } else {
+                alert("Wrong password!");
+            }
+        }
+
+        function addProduct() {
+            const name = document.getElementById('newProdName').value.toUpperCase();
+            const cat = document.getElementById('newProdCat').value;
+            if(name) {
+                products.unshift({ category: cat, item: name });
+                renderProducts(products);
+                document.getElementById('newProdName').value = "";
+                alert(name + " added successfully!");
+            }
         }
 
         function filterItems() {
             const s = document.getElementById('itemSearch').value.toLowerCase();
-            const f = products.filter(p => (currentCategory === 'all' || p.category === currentCategory) && p.item.toLowerCase().includes(s));
+            const f = products.filter(p => p.item.toLowerCase().includes(s));
             renderProducts(f);
+        }
+
+        function setCategory(cat) {
+            if(cat === 'all') renderProducts(products);
+            else renderProducts(products.filter(p => p.category === cat));
         }
 
         renderProducts(products);
