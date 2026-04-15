@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhavani Mart | Wholesale Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f3f7fa; color: #1e293b; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f3f7fa; color: #1e293b; }
         .bg-navy { background-color: #003366; }
         .text-gold { color: #FFD700; }
         .bg-gold { background-color: #FFD700; }
@@ -16,7 +16,9 @@
             background: linear-gradient(rgba(0,51,102,0.8), rgba(0,51,102,0.8)), url('https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80'); 
             background-size: cover; background-position: center;
         }
+        .offer-card { border: 2px solid #FFD700; background: #fffbeb; }
         .product-card { border-top: 5px solid #FFD700; transition: transform 0.2s ease; }
+        .product-card:hover { transform: translateY(-5px); }
     </style>
 </head>
 <body>
@@ -27,16 +29,17 @@
 
     <nav class="bg-navy p-4 sticky top-0 z-50 shadow-xl flex justify-between items-center">
         <div>
-            <h1 class="text-xl font-800 text-gold leading-none uppercase italic tracking-tighter">BHAVANI<span class="text-white">MART</span></h1>
-            <p class="text-[9px] font-semibold text-blue-200 uppercase tracking-widest">Karmanghat • Wholesale</p>
+            <h1 class="text-xl font-900 text-gold leading-none uppercase italic tracking-tighter">BHAVANI<span class="text-white">MART</span></h1>
+            <p class="text-[9px] font-bold text-blue-200 uppercase tracking-widest">Karmanghat • Wholesale</p>
         </div>
-        <a href="https://wa.me/919182841682" class="bg-green-500 text-white px-5 py-2 rounded-full font-800 text-[10px] shadow-lg">ORDER NOW</a>
+        <a href="https://wa.me/919182841682" class="bg-green-500 text-white px-5 py-2 rounded-full font-800 text-[10px] shadow-lg hover:bg-green-600">ORDER NOW</a>
     </nav>
 
     <div id="todayOffersSection" class="hidden">
-        <div class="bg-gold p-4 shadow-md">
+        <div class="bg-gold p-4 border-b-2 border-navy">
             <h2 class="text-navy font-800 text-center text-sm uppercase italic tracking-tighter mb-4">🌟 TODAY'S SPECIAL OFFERS 🌟</h2>
-            <div id="offersGrid" class="flex gap-4 overflow-x-auto no-scrollbar pb-2"></div>
+            <div id="offersGrid" class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+                </div>
         </div>
     </div>
 
@@ -45,14 +48,14 @@
         <p class="text-sm font-light tracking-[0.2em] opacity-90 uppercase mt-2">3000 Sq. Ft. Wholesale Store</p>
     </section>
 
-    <div class="bg-white p-6 text-center shadow-inner border-b">
-        <h3 class="text-slate-500 font-800 text-sm mb-3 uppercase tracking-tight italic">Tired of typing? Take a photo of your list!</h3>
-        <a href="https://wa.me/919182841682?text=I%20am%20sending%20a%20photo%20of%20my%20list" class="bg-navy text-white px-10 py-3 rounded-full text-[11px] font-800 inline-block shadow-xl">WHATSAPP LIST PHOTO</a>
+    <div class="bg-navy p-6 text-center shadow-inner">
+        <h3 class="text-gold font-800 text-sm mb-3 uppercase tracking-tight italic">Tired of typing? Take a photo of your list!</h3>
+        <a href="https://wa.me/919182841682?text=I%20am%20sending%20a%20photo%20of%20my%20list" class="bg-gold text-navy px-10 py-3 rounded-full text-[11px] font-800 inline-block shadow-xl">WHATSAPP LIST PHOTO</a>
     </div>
 
     <div class="bg-white sticky top-[68px] z-40 border-b shadow-md p-4">
         <div class="max-w-xl mx-auto text-center">
-            <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search Rice, Soap, Oil..." class="w-full bg-slate-50 p-4 rounded-2xl border-2 border-slate-100 text-sm mb-4 outline-none focus:border-gold font-medium">
+            <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search items (Rice, Soap, Oil)..." class="w-full bg-slate-50 p-4 rounded-2xl border-2 border-slate-100 text-sm mb-4 outline-none focus:border-gold font-medium">
             <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2" id="catFilters">
                 <button onclick="setCategory('all')" class="bg-navy text-gold px-6 py-2 rounded-full text-[10px] font-800 uppercase whitespace-nowrap">All Items</button>
             </div>
@@ -60,8 +63,15 @@
     </div>
 
     <main class="container mx-auto p-4 py-10 mb-20">
-        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6"></div>
+        <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            </div>
     </main>
+
+    <footer class="bg-navy text-white p-12 text-center">
+        <p class="text-[10px] text-blue-200 font-medium uppercase tracking-widest mb-2">Narayana Heights, Karmanghat, Hyderabad</p>
+        <p class="text-2xl font-800 text-gold mb-6 tracking-tighter">+91 9182841682</p>
+        <p class="text-[9px] opacity-30">© 2026 Bhavani Mart</p>
+    </footer>
 
     <script>
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQK4lAzDWObCjowN-SuMvzqFpz46ePH4kDCYBrdMCY3A1Uz2pv_ooVR8h2c8JNNpZmKxsSVaq7dDOQc/pub?gid=0&single=true&output=csv';
@@ -93,7 +103,7 @@
                         mrp: mrp,
                         offer: offer
                     };
-                }).filter(i => i.name && i.name.length > 1);
+                }).filter(i => i.name && i.name.length > 1 && !i.name.includes('<'));
 
                 renderOffers();
                 generateCategoryButtons();
@@ -117,7 +127,7 @@
             if (offers.length > 0) {
                 section.classList.remove('hidden');
                 grid.innerHTML = offers.map(i => `
-                    <div class="min-w-[150px] bg-white rounded-2xl p-3 shadow-md border-2 border-yellow-200 text-center">
+                    <div class="min-w-[150px] bg-white rounded-2xl p-3 shadow-md offer-card text-center">
                         <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="h-20 mx-auto object-contain mb-2">
                         <h4 class="text-[10px] font-800 text-navy uppercase leading-tight h-8 overflow-hidden">${i.name}</h4>
                         <div class="my-1">${formatPriceHTML(i.mrp, i.offer)}</div>
