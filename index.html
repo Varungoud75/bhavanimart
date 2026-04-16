@@ -16,20 +16,25 @@
         
         .logo-bold { font-weight: 900 !important; letter-spacing: 0.05em; font-size: 1.8rem; }
         
-        /* Updated Background to Supermarket Aisle (No Vegetables) */
         .hero-banner { 
-    background: linear-gradient(rgba(16, 29, 54, 0.8), rgba(16, 29, 54, 0.8)), 
-                url('https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2000&auto=format&fit=crop'); 
-    background-size: cover; 
-    background-position: center;
-}
+            background: linear-gradient(rgba(16, 29, 54, 0.8), rgba(16, 29, 54, 0.8)), 
+                        url('https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2000&auto=format&fit=crop'); 
+            background-size: cover; 
+            background-position: center;
+        }
         .offer-card { border: 3px solid #FFD700; background: #ffffff; border-radius: 20px; min-width: 160px; }
         .product-card { border-top: 4px solid #FFD700; border-radius: 15px; background: white; transition: 0.3s; }
+
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        .highlight-banner { animation: pulse-soft 3s infinite ease-in-out; }
     </style>
 </head>
 <body>
 
-    <div class="bg-red-600 text-white py-2 text-center text-[10px] font-black uppercase tracking-widest">
+    <div class="bg-red-600 text-white py-4 text-center text-sm md:text-xl font-black uppercase tracking-widest shadow-2xl highlight-banner">
         🔥 SPECIAL DISCOUNT ON EVERY ITEM • BELOW MRP 🔥
     </div>
 
@@ -40,22 +45,22 @@
             </h1>
             <p class="text-[11px] font-bold text-white opacity-90 uppercase tracking-[0.1em] mt-1">+91 9182841682</p>
         </div>
-        <a href="https://wa.me/919182841682" class="bg-green-600 text-white px-5 py-2 rounded-md font-black text-[12px] shadow-lg uppercase">Order Now</a>
+        <a href="https://wa.me/919182841682?text=Hi%20Bhavani%20Mart,%20I%20would%20like%20to%20place%20an%20order." class="bg-green-600 text-white px-5 py-2 rounded-md font-black text-[12px] shadow-lg uppercase">Order Now</a>
     </nav>
 
     <div id="offerSection" class="hidden">
         <div class="bg-gold p-8 border-b-4 border-navy">
             <h2 class="text-[#101D36] font-black text-xl uppercase tracking-tighter mb-4 text-center">
-    <span class="opacity-100">★</span> TODAY'S EXCLUSIVE OFFERS <span class="opacity-100">★</span>
-</h2>
+                <span class="opacity-100">★</span> TODAY'S EXCLUSIVE OFFERS <span class="opacity-100">★</span>
+            </h2>
             <div id="offersGrid" class="flex gap-4 overflow-x-auto no-scrollbar py-2"></div>
         </div>
     </div>
 
     <section class="hero-banner py-24 text-center text-white px-4 border-b-4 border-gold">
         <h2 class="text-5xl md:text-7xl font-[900] text-gold uppercase tracking-tighter mb-2">
-    BHAVANI HYPER MART
-</h2>
+            BHAVANI HYPER MART
+        </h2>
         <p class="text-lg md:text-xl font-black text-white tracking-[0.2em] uppercase">
             3000 SQ. FT. WHOLESALE STORE
         </p>
@@ -65,7 +70,7 @@
         <h3 class="text-gold font-black text-2xl md:text-4xl mb-8 uppercase tracking-tight leading-tight">
             TIRED OF TYPING?<br> TAKE A PHOTO OF YOUR LIST!
         </h3>
-        <a href="https://wa.me/919182841682" class="bg-gold text-navy px-12 py-5 rounded-full text-[16px] font-black inline-block shadow-2xl uppercase tracking-widest hover:scale-105 transition-transform">
+        <a href="https://wa.me/919182841682?text=Hi%20Bhavani%20Mart,%20I%20have%20attached%20a%20photo%20of%20my%20grocery%20list." class="bg-gold text-navy px-12 py-5 rounded-full text-[16px] font-black inline-block shadow-2xl uppercase tracking-widest hover:scale-105 transition-transform">
             WHATSAPP LIST PHOTO
         </a>
     </div>
@@ -119,14 +124,16 @@
             } catch (e) { console.error("Data error"); }
         }
 
+        // UPDATED: Removed Rupee Symbol
         function formatPriceHTML(mrp, offer) {
             if (mrp) {
-                return `<span class="text-slate-400 line-through text-[11px] font-bold mr-2">₹${mrp}</span>
-                        <span class="text-red-600 font-black text-lg">₹${offer}</span>`;
+                return `<span class="text-slate-400 line-through text-[11px] font-bold mr-2">${mrp}</span>
+                        <span class="text-red-600 font-black text-lg">${offer}</span>`;
             }
-            return `<span class="text-navy font-black text-lg">₹${offer}</span>`;
+            return `<span class="text-navy font-black text-lg">${offer}</span>`;
         }
 
+        // UPDATED: Dynamic WhatsApp Messaging for Offers
         function renderOffers() {
             const offers = allItems.filter(i => i.category.includes('TODAY OFFER'));
             const section = document.getElementById('offerSection');
@@ -134,16 +141,18 @@
 
             if (offers.length > 0) {
                 section.classList.remove('hidden');
-                grid.innerHTML = offers.map(i => `
+                grid.innerHTML = offers.map(i => {
+                    const waMessage = encodeURIComponent(`Hi Bhavani Mart, I want to grab the deal on ${i.name} priced at ${i.offer}.`);
+                    return `
                     <div class="offer-card p-4 shadow-lg text-center flex flex-col justify-between">
                         <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" 
                              onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'"
                              class="h-24 mx-auto object-contain mb-2">
                         <h4 class="text-[11px] font-black text-navy uppercase h-8 overflow-hidden">${i.name}</h4>
                         <div class="my-2">${formatPriceHTML(i.mrp, i.offer)}</div>
-                        <a href="https://wa.me/919182841682" class="block bg-navy text-gold text-[10px] py-2 rounded-lg font-black uppercase">Grab Deal</a>
+                        <a href="https://wa.me/919182841682?text=${waMessage}" class="block bg-navy text-gold text-[10px] py-2 rounded-lg font-black uppercase">Grab Deal</a>
                     </div>
-                `).join('');
+                `}).join('');
             }
         }
 
@@ -159,12 +168,15 @@
             });
         }
 
+        // UPDATED: Dynamic WhatsApp Messaging for Products
         function render() {
             const grid = document.getElementById('productGrid');
             const query = document.getElementById('itemSearch').value.toLowerCase();
             const filtered = allItems.filter(i => (activeCat === 'all' || i.category === activeCat) && i.name.toLowerCase().includes(query));
 
-            grid.innerHTML = filtered.map(i => `
+            grid.innerHTML = filtered.map(i => {
+                const waMessage = encodeURIComponent(`Hi Bhavani Mart, I want to order ${i.name} from the ${i.category} section.`);
+                return `
                 <div class="product-card shadow-lg p-4 flex flex-col justify-between border">
                     <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" 
                          onerror="this.src='https://cdn-icons-png.flaticon.com/512/3081/3081840.png'"
@@ -173,10 +185,10 @@
                         <p class="text-[9px] font-black text-blue-600 uppercase mb-1 opacity-70">${i.category}</p>
                         <h4 class="text-[12px] font-black text-navy uppercase h-8 overflow-hidden mb-2">${i.name}</h4>
                         <div class="mb-4">${formatPriceHTML(i.mrp, i.offer)}</div>
-                        <a href="https://wa.me/919182841682" class="block bg-navy text-gold py-3 rounded-lg text-[11px] font-black text-center uppercase">Order Now</a>
+                        <a href="https://wa.me/919182841682?text=${waMessage}" class="block bg-navy text-gold py-3 rounded-lg text-[11px] font-black text-center uppercase">Order Now</a>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         function setCategory(c) { activeCat = c; render(); }
