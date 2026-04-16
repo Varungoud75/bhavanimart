@@ -175,7 +175,7 @@
             const filtered = allItems.filter(i => (activeCat === 'all' || i.category === activeCat) && i.name.toLowerCase().includes(query));
 
             grid.innerHTML = filtered.map(i => {
-                const waMessage = encodeURIComponent(`Hi Bhavani Mart, I want to order ${i.name} from the ${i.category} section.`);
+                const waMessage = encodeURIComponent(`order ${i.name} from the ${i.category} section.`);
                 return `
                 <div class="product-card shadow-lg p-4 flex flex-col justify-between border">
                     <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" 
