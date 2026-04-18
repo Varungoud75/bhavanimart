@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bhavani Mart | Wholesale Store</title>
+    <title>Bhavani Mart | Wholesale</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -13,13 +13,7 @@
         .text-gold { color: #FFD700; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        .hero-banner { 
-            background: linear-gradient(rgba(16, 29, 54, 0.7), rgba(16, 29, 54, 0.7)), 
-                        url('https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2000&auto=format&fit=crop'); 
-            background-size: cover; background-position: center;
-        }
-
-        /* EXACT SEARCH BAR STYLE FROM PHOTO */
+        /* Search Bar UI from your photo */
         .search-container {
             background: white;
             border-radius: 12px;
@@ -38,21 +32,21 @@
             color: #101D36;
             font-weight: 700;
             font-size: 14px;
-            border-radius: 12px;
         }
 
-        /* CART DRAWER */
+        /* Floating Cart Icon */
+        .floating-cart {
+            position: fixed; bottom: 20px; right: 20px;
+            background: #e11d48; padding: 15px; border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 100;
+        }
+
         .cart-drawer {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%;
-            background: white; z-index: 100; transition: 0.4s; color: #101D36;
+            background: white; z-index: 200; transition: 0.4s; color: #101D36;
         }
         .cart-drawer.open { right: 0; }
-        .cart-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); display: none; z-index: 90;
-        }
-        .cart-overlay.show { display: block; }
-
+        
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
         .animate-marquee { display: inline-block; white-space: nowrap; animation: marquee 15s linear infinite; }
     </style>
@@ -60,23 +54,23 @@
 <body>
 
     <div class="bg-red-600 py-1.5 overflow-hidden border-b border-white/10">
-        <p class="animate-marquee text-white font-[900] text-[10px] uppercase tracking-tighter">
+        <p class="animate-marquee text-white font-[900] text-[10px] uppercase">
             🔥 SPECIAL DISCOUNT ON EVERY ITEM! VISIT TODAY & SAVE BIG! 🔥
         </p>
     </div>
 
-    <nav class="sticky top-0 z-50 bg-navy p-4 flex justify-between items-center border-b border-gold/20 shadow-xl">
+    <nav class="sticky top-0 z-50 bg-navy p-4 flex justify-between items-center border-b border-gold/20">
         <div>
-            <h1 class="font-[900] text-xl leading-none uppercase tracking-widest">
+            <h1 class="font-[900] text-xl uppercase tracking-widest">
                 <span class="text-gold">BHAVANI</span> <span class="text-white">MART</span>
             </h1>
-            <p class="text-[9px] font-bold text-white/80 uppercase mt-1">+91 9182841682</p>
+            <p class="text-[9px] font-bold text-white/80 mt-1 uppercase">+91 9182841682</p>
         </div>
-        <button onclick="toggleCart()" class="bg-green-600 text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase shadow-lg">My List</button>
+        <button onclick="toggleCart()" class="bg-green-600 text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase">My List</button>
     </nav>
 
-    <section class="hero-banner py-8 text-center px-4">
-        <h2 class="text-2xl font-[900] text-gold uppercase mb-6 leading-none tracking-tighter">BHAVANI HYPER MART</h2>
+    <section class="py-6 text-center px-4 bg-navy">
+        <h2 class="text-2xl font-[900] text-gold uppercase mb-6">BHAVANI HYPER MART</h2>
         <div class="search-container">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -85,30 +79,32 @@
         </div>
     </section>
 
-    <div class="p-6 text-center space-y-4 max-w-md mx-auto">
-        <h3 class="text-white font-black text-lg uppercase tracking-tight">
-            <span class="text-gold">TIRED OF TYPING?</span><br>
-            TAKE A PHOTO OF YOUR LIST!
-        </h3>
-        <div class="grid grid-cols-2 gap-3 px-2">
-            <a href="https://wa.me/919182841682" class="bg-gold text-navy py-3 rounded-full text-[10px] font-[900] flex items-center justify-center gap-2 uppercase shadow-xl">📸 WhatsApp</a>
-            <a href="#" class="bg-white text-navy py-3 rounded-full text-[10px] font-[900] flex items-center justify-center gap-2 uppercase border-2 border-gold shadow-xl">📍 Directions</a>
-        </div>
+    <div class="p-4 text-center space-y-3 max-w-md mx-auto">
+        <h3 class="text-white font-black text-sm uppercase">TIRED OF TYPING? TAKE A PHOTO!</h3>
+        <a href="https://wa.me/919182841682" class="w-full bg-gold text-navy py-3 rounded-full text-[11px] font-[900] flex items-center justify-center gap-2 uppercase shadow-lg">
+            📸 WHATSAPP LIST PHOTO
+        </a>
+        <a href="#" class="w-full bg-white text-navy py-3 rounded-full text-[11px] font-[900] flex items-center justify-center gap-2 uppercase border-2 border-gold shadow-lg">
+            📍 GET DIRECTIONS
+        </a>
     </div>
 
-    <div class="bg-slate-50 min-h-screen">
+    <div class="bg-slate-50 min-h-screen mt-6">
         <div class="p-3 overflow-x-auto no-scrollbar flex gap-2" id="catFilters">
             <button onclick="setCategory('all')" class="bg-navy text-gold px-4 py-1.5 rounded-lg text-[9px] font-black uppercase whitespace-nowrap">All Items</button>
         </div>
 
         <main class="p-2 mb-24">
-            <div id="productGrid" class="grid grid-cols-3 md:grid-cols-6 gap-2">
-                </div>
+            <div id="productGrid" class="grid grid-cols-3 md:grid-cols-6 gap-2"></div>
         </main>
     </div>
 
-    <div id="cartOverlay" class="cart-overlay" onclick="toggleCart()"></div>
-    <div id="cartDrawer" class="cart-drawer flex flex-col p-6">
+    <div class="floating-cart" onclick="toggleCart()">
+        <span id="cartCount" class="absolute -top-1 -right-1 bg-navy text-gold text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-white">0</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </div>
+
+    <div id="cartDrawer" class="cart-drawer flex flex-col p-6 shadow-2xl">
         <div class="flex justify-between items-center border-b-2 pb-4 mb-4">
             <h2 class="font-black text-xl uppercase text-navy">My List</h2>
             <button onclick="toggleCart()" class="text-red-600 font-black text-xs">CLOSE</button>
@@ -134,8 +130,7 @@
                         category: parts[0]?.replace(/"/g, '').trim().toUpperCase() || 'GENERAL', 
                         name: parts[1]?.replace(/"/g, '').trim() || '',
                         img: parts[2]?.replace(/"/g, '').trim() || '',
-                        price: parts[3]?.replace(/"/g, '').trim() || '',
-                        mrp: parts[4]?.replace(/"/g, '').trim() || ''
+                        priceData: parts[3]?.replace(/"/g, '').trim() || '' // Format: MRP/Discount
                     };
                 }).filter(i => i.name.length > 1);
                 generateCategoryButtons();
@@ -148,7 +143,13 @@
             const query = document.getElementById('itemSearch').value.toLowerCase();
             const filtered = allItems.filter(i => (activeCat === 'all' || i.category === activeCat) && i.name.toLowerCase().includes(query));
             
-            grid.innerHTML = filtered.map((i, idx) => `
+            grid.innerHTML = filtered.map((i, idx) => {
+                // SPLIT MRP AND DISCOUNT (e.g., "500/450")
+                const prices = i.priceData.split('/');
+                const mrp = prices[0] || '';
+                const discount = prices[1] || '';
+
+                return `
                 <div class="bg-white rounded-xl p-2 flex flex-col border border-slate-100 shadow-sm text-navy">
                     <div class="h-16 flex items-center justify-center mb-1">
                         <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="max-h-full object-contain">
@@ -156,19 +157,18 @@
                     <h4 class="text-[9px] font-[800] uppercase h-6 overflow-hidden leading-tight mb-1">${i.name}</h4>
                     
                     <div class="flex flex-col mb-1">
-                        <span class="text-[11px] font-[900] leading-none">₹${i.price}</span>
-                        <span class="text-[8px] text-slate-300 line-through font-normal mt-0.5">₹${i.mrp}</span>
+                        ${discount ? `<span class="text-[11px] font-[900] leading-none">₹${discount}</span>` : `<span class="text-[11px] font-[900] leading-none">₹${mrp}</span>`}
+                        ${discount ? `<span class="text-[8px] text-slate-300 line-through font-normal mt-0.5">₹${mrp}</span>` : ''}
                     </div>
 
-                    <input type="text" id="qty-${idx}" placeholder="Qty (ex: 1kg)" 
-                           class="w-full text-[8px] border border-slate-200 rounded p-1 mb-1 outline-none focus:border-green-600 font-bold">
+                    <input type="text" id="qty-${idx}" placeholder="Qty" class="w-full text-[8px] border rounded p-1 mb-1 outline-none font-bold">
 
                     <button onclick="addToCart(${idx}, '${i.name.replace(/'/g, "\\'")}')" 
                             class="w-full border border-green-600 text-green-700 py-1 rounded-lg text-[8px] font-black uppercase bg-white">
                         ADD
                     </button>
-                </div>
-            `).join('');
+                </div>`;
+            }).join('');
         }
 
         function addToCart(idx, name) {
@@ -180,21 +180,19 @@
         }
 
         function updateCart() {
+            document.getElementById('cartCount').innerText = cart.length;
             const container = document.getElementById('cartItems');
-            container.innerHTML = cart.length === 0 ? '<p class="text-center py-10 text-[10px] font-bold text-navy">Empty List</p>' : 
-            cart.map((item, i) => `
+            container.innerHTML = cart.map((item, i) => `
                 <div class="flex justify-between items-center bg-slate-50 p-2 rounded-lg border text-navy">
                     <p class="font-black text-[9px] uppercase">${item.name} (${item.qty})</p>
                     <button onclick="removeItem(${i})" class="text-red-500 font-black px-2">✕</button>
-                </div>
-            `).join('');
+                </div>`).join('');
         }
 
         function removeItem(i) { cart.splice(i, 1); updateCart(); }
-
         function sendOrder() {
             if (cart.length === 0) return;
-            let msg = "📦 *ORDER LIST*\n\n" + cart.map((item, i) => `${i+1}. *${item.name}* - ${item.qty}`).join('\n');
+            let msg = "📦 *ORDER*\n\n" + cart.map((item, i) => `${i+1}. *${item.name}* - ${item.qty}`).join('\n');
             window.location.href = `https://wa.me/919182841682?text=${encodeURIComponent(msg)}`;
         }
 
@@ -216,7 +214,7 @@
         }
 
         function setCategory(c) { activeCat = c; render(); }
-        function toggleCart() { document.getElementById('cartDrawer').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('show'); }
+        function toggleCart() { document.getElementById('cartDrawer').classList.toggle('open'); }
         loadData();
     </script>
 </body>
