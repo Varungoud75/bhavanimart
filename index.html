@@ -45,21 +45,28 @@
             </h1>
             <div class="flex gap-3 mt-1 items-center">
                 <p class="text-[9px] font-bold text-white/80 uppercase tracking-widest">+91 9182841682</p>
-                <a href="https://maps.app.goo.gl/YourActualLinkHere" target="_blank" class="text-gold text-[9px] font-black underline">📍 VISIT STORE</a>
+                <a href="https://maps.app.goo.gl/BhavaniMartLink" target="_blank" class="text-gold text-[9px] font-black underline">📍 VISIT STORE</a>
             </div>
         </div>
         <button onclick="toggleCart()" class="bg-green-600 text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase shadow-lg">My List</button>
     </nav>
 
-    <section class="hero-banner py-12 text-center text-white px-4 border-b-4 border-gold">
+    <section class="hero-banner py-12 text-center text-white px-4">
         <h2 class="text-3xl md:text-5xl font-[900] text-gold uppercase tracking-tighter mb-1 leading-none">BHAVANI HYPER MART</h2>
         <p class="text-[10px] md:text-sm font-black text-white tracking-[0.2em] uppercase">KARMANGHAT'S BIGGEST 3000 SQ. FT. STORE</p>
-        <p class="text-[9px] mt-2 opacity-80 uppercase font-bold text-white">Near Pochamma Temple, Hyderabad</p>
     </section>
+
+    <div class="bg-red-600 py-2 overflow-hidden whitespace-nowrap border-y-2 border-white/20">
+        <div class="inline-block animate-pulse px-4">
+            <p class="text-white font-[900] text-[11px] uppercase tracking-tighter">
+                🔥 SPECIAL DISCOUNT ON EVERY ITEM! VISIT TODAY & SAVE BIG! 🔥 SPECIAL DISCOUNT ON EVERY ITEM! 🔥
+            </p>
+        </div>
+    </div>
 
     <div class="p-6 text-center space-y-4 max-w-md mx-auto">
         <h3 class="text-gold font-black text-lg md:text-xl uppercase tracking-tight leading-tight">
-            TIRED OF TYPING? <br> <span class="text-white">TAKE A PHOTO OF YOUR LIST!</span>
+            TIRED OF TYPING? <br> <span class="text-white font-bold text-sm opacity-80 uppercase">TAKE A PHOTO OF YOUR LIST!</span>
         </h3>
         
         <div class="space-y-3">
@@ -67,7 +74,7 @@
                class="w-full bg-gold text-navy py-3 rounded-full text-[13px] font-[900] flex items-center justify-center gap-2 shadow-2xl uppercase tracking-widest">
                 📸 WhatsApp List Photo
             </a>
-            <a href="https://maps.app.goo.gl/YourActualLinkHere" 
+            <a href="https://maps.app.goo.gl/BhavaniMartLink" 
                class="w-full bg-white text-navy py-3 rounded-full text-[13px] font-[900] flex items-center justify-center gap-2 shadow-2xl uppercase tracking-widest border-2 border-gold">
                 📍 Get Directions
             </a>
@@ -78,8 +85,17 @@
         <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search items (Rice, Soap, Oil...)" 
                class="w-full bg-white/10 p-3 rounded-xl border border-white/20 text-white text-sm mb-3 outline-none focus:border-gold font-bold">
         <div class="flex gap-2 overflow-x-auto no-scrollbar" id="catFilters">
-            <button onclick="setCategory('all')" class="bg-gold text-navy px-5 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap">All Items</button>
+            <button onclick="setCategory('all')" id="cat-all" class="bg-gold text-navy px-5 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap">All Items</button>
         </div>
+    </div>
+
+    <div id="offersSection" class="hidden px-4 pt-6 pb-2">
+        <div class="flex items-center gap-2 mb-4">
+            <div class="h-1 w-8 bg-red-600"></div>
+            <h3 class="text-white font-black text-sm uppercase tracking-widest">Today's Special Offers</h3>
+        </div>
+        <div id="offersGrid" class="flex gap-4 overflow-x-auto no-scrollbar pb-4">
+            </div>
     </div>
 
     <main class="p-2 mb-20">
@@ -91,7 +107,7 @@
     <div id="cartDrawer" class="cart-drawer flex flex-col p-6">
         <div class="flex justify-between items-center border-b-2 pb-4 mb-4">
             <h2 class="font-black text-xl uppercase tracking-tighter">My List</h2>
-            <button onclick="toggleCart()" class="text-red-600 font-black text-xs uppercase">Close</button>
+            <button onclick="toggleCart()" class="text-red-600 font-black text-xs uppercase font-black">Close</button>
         </div>
         <div id="cartItems" class="flex-grow overflow-y-auto no-scrollbar space-y-3"></div>
         <button onclick="sendOrder()" class="w-full bg-green-600 text-white py-4 rounded-xl font-black uppercase mt-4 shadow-xl">
@@ -124,10 +140,30 @@
                         img: parts[2]?.replace(/"/g, '').trim() || ''
                     };
                 }).filter(i => i.name.length > 1);
+                
                 generateCategoryButtons();
+                renderOffers(); // Load automatic offers
                 updateCart();
                 render();
-            } catch (e) { console.error("Error loading data"); }
+            } catch (e) { console.error("Data error"); }
+        }
+
+        // AUTOMATIC OFFER RENDERING
+        function renderOffers() {
+            const offerItems = allItems.filter(i => i.category.includes('OFFER'));
+            const container = document.getElementById('offersGrid');
+            const section = document.getElementById('offersSection');
+
+            if (offerItems.length > 0) {
+                section.classList.remove('hidden');
+                container.innerHTML = offerItems.map((i, idx) => `
+                    <div class="min-w-[140px] bg-white rounded-xl p-3 shadow-lg border-2 border-red-500">
+                        <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="h-20 mx-auto object-contain mb-2">
+                        <h4 class="text-[10px] font-black text-navy uppercase text-center leading-tight mb-2">${i.name}</h4>
+                        <button onclick="addToCart('offer-${idx}', '${i.name}')" class="w-full bg-red-600 text-white py-1 rounded-lg text-[8px] font-black uppercase">Add Offer</button>
+                    </div>
+                `).join('');
+            }
         }
 
         function toggleCart() {
@@ -137,22 +173,18 @@
 
         function addToCart(id, name) {
             const qtyInput = document.getElementById(`qty-${id}`);
-            const qtyVal = qtyInput.value || "1 unit";
+            const qtyVal = qtyInput ? (qtyInput.value || "1 unit") : "1 Special Offer";
             cart.push({ name: name, qty: qtyVal });
             localStorage.setItem('bhavaniCart', JSON.stringify(cart));
             updateCart();
-            
-            const btn = event.target;
-            btn.innerText = "ADDED ✓";
-            setTimeout(() => { btn.innerText = "ADD TO LIST"; }, 800);
-            qtyInput.value = "";
+            if(qtyInput) qtyInput.value = "";
         }
 
         function updateCart() {
-            const container = document.getElementById('cartItems');
             document.getElementById('cartCount').innerText = cart.length;
+            const container = document.getElementById('cartItems');
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-slate-400 mt-10 uppercase text-[10px] font-bold">Your list is empty</p>`;
+                container.innerHTML = `<p class="text-center text-slate-400 mt-10 uppercase text-[10px] font-bold">List is empty</p>`;
                 return;
             }
             container.innerHTML = cart.map((item, index) => `
@@ -180,7 +212,7 @@
         }
 
         function generateCategoryButtons() {
-            const cats = [...new Set(allItems.map(i => i.category))];
+            const cats = [...new Set(allItems.map(i => i.category))].filter(c => !c.includes('OFFER'));
             const container = document.getElementById('catFilters');
             cats.forEach(c => {
                 const btn = document.createElement('button');
@@ -194,34 +226,8 @@
         function render() {
             const grid = document.getElementById('productGrid');
             const query = document.getElementById('itemSearch').value.toLowerCase();
-            const filtered = allItems.filter(i => (activeCat === 'all' || i.category === activeCat) && i.name.toLowerCase().includes(query));
+            const filtered = allItems.filter(i => !i.category.includes('OFFER') && (activeCat === 'all' || i.category === activeCat) && i.name.toLowerCase().includes(query));
 
             grid.innerHTML = filtered.map((i, idx) => `
                 <div class="product-card p-2 flex flex-col justify-between border h-full shadow-md">
-                    <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" 
-                         class="h-24 mx-auto object-contain mb-1">
-                    <div class="text-center">
-                        <p class="text-[8px] font-bold text-blue-600 uppercase mb-0.5">${i.category}</p>
-                        <h4 class="text-[11px] font-[900] uppercase h-7 overflow-hidden leading-tight mb-2">${i.name}</h4>
-                        
-                        <div class="space-y-1">
-                            <div class="flex items-center bg-slate-100 rounded-lg border border-slate-200">
-                                <span class="text-[8px] font-black px-2 text-slate-400">QTY</span>
-                                <input type="text" id="qty-prod-${idx}" placeholder="e.g. 2kg" 
-                                       class="w-full bg-transparent p-1.5 text-[10px] font-bold outline-none">
-                            </div>
-                            <button onclick="addToCart('prod-${idx}', '${i.name.replace(/'/g, "\\'")}')" 
-                                    class="w-full bg-navy text-gold py-2 rounded-lg text-[10px] font-black uppercase shadow-sm">
-                                Add to List
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function setCategory(c) { activeCat = c; render(); }
-        loadData();
-    </script>
-</body>
-</html>
+                    <img src="${i.img
