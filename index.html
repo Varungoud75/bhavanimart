@@ -53,16 +53,20 @@
             </p>
         </div>
 
-        <nav class="bg-navy p-4 flex justify-between items-center border-b border-gold/20">
-            <div>
-                <h1 class="font-[900] text-xl leading-none uppercase tracking-widest">
-                    <span class="text-gold">BHAVANI</span> <span class="text-white">MART</span>
-                </h1>
-                <p class="text-[9px] font-bold text-white/80 uppercase mt-1 tracking-widest">+91 9182841682</p>
-                <a href="https://maps.google.com" class="bg-white text-navy py-1 rounded-full text-[8px] font-[900] flex items-center justify-center gap-2 uppercase tracking-widest border-2 border-gold shadow-xl">📍VISIT STORE</a>
-            </div>
-            <button onclick="toggleCart()" class="bg-green-600 text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase shadow-lg">CART</button>
-        </nav>
+       <nav class="bg-navy p-4 flex justify-between items-center border-b border-gold/20">
+    <div>
+        <h1 class="font-[900] text-xl leading-none uppercase tracking-widest">
+            <span class="text-gold">BHAVANI</span> <span class="text-white">MART</span>
+        </h1>
+        <div class="flex items-center gap-2 mt-1">
+            <p class="text-[9px] font-bold text-white/80 uppercase tracking-widest">+91 9182841682</p>
+            <a href="https://maps.app.goo.gl/your-link-here" class="bg-white text-navy px-2 py-0.5 rounded flex items-center gap-1 text-[8px] font-[900] uppercase shadow-sm">
+                📍 VISIT STORE
+            </a>
+        </div>
+    </div>
+    <button onclick="toggleCart()" class="bg-green-600 text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase shadow-lg">MY LIST</button>
+</nav>
     </div>
 
    <section class="hero-banner py-12 text-center text-white px-4">
@@ -75,15 +79,20 @@
         <div id="offersGrid" class="flex gap-4 overflow-x-auto no-scrollbar pb-2"></div>
     </div>
 
-   <div class="p-6 text-center space-y-4 max-w-md mx-auto">
-        <h3 class="text-white font-black text-lg uppercase tracking-tight leading-tight">
-            <span class="text-gold">TIRED OF TYPING?</span><br>
-            TAKE A PHOTO OF YOUR LIST!
-        </h3>
-        <div class="grid grid-cols-2 gap-3">
-            <a href="https://wa.me/919182841682" class="bg-gold text-navy py-5 rounded-full text-[14px] font-[900] flex items-center justify-center gap-2 uppercase tracking-widest shadow-2xl">📸 WhatsApp List Photo</a>  </div>
-            <a href="https://maps.google.com" class="bg-white text-navy py-3 rounded-full text-[10px] font-[900] flex items-center justify-center gap-2 uppercase tracking-widest border-2 border-gold shadow-xl">📍 Directions</a>
-        </div>
+  <div class="bg-navy p-10 text-center border-y-4 border-gold flex flex-col items-center"> 
+    <h3 class="text-gold font-black text-xl md:text-2xl mb-6 uppercase tracking-tight leading-tight"> 
+        TIRED OF TYPING?<br> TAKE A PHOTO OF YOUR LIST! 
+    </h3> 
+    
+    <a href="https://wa.me/919182841682?text=Hi%20Bhavani%20Mart,%20I%20am%20ordering%20the%20following%20items.%20I%20have%20attached%20a%20photo%20of%20my%20list." 
+       class="bg-gold text-navy w-full max-w-[300px] py-4 rounded-full text-[14px] font-[900] flex items-center justify-center gap-2 shadow-2xl uppercase tracking-widest hover:scale-105 transition-transform"> 
+        📸 WHATSAPP LIST PHOTO 
+    </a> 
+
+    <a href="https://maps.app.goo.gl/your-link-here" class="text-white underline text-[10px] font-bold uppercase tracking-widest mt-6 block">
+        📍 GET DIRECTIONS
+    </a>
+</div>
     </div>
 
     <div class="bg-navy p-4 border-y border-white/10 shadow-2xl sticky top-[60px] z-40">
