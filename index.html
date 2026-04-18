@@ -230,4 +230,24 @@
 
             grid.innerHTML = filtered.map((i, idx) => `
                 <div class="product-card p-2 flex flex-col justify-between border h-full shadow-md">
-                    <img src="${i.img
+                    <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="h-24 mx-auto object-contain mb-1">
+                    <div class="text-center">
+                        <p class="text-[8px] font-bold text-blue-600 uppercase mb-0.5">${i.category}</p>
+                        <h4 class="text-[11px] font-[900] uppercase h-7 overflow-hidden leading-tight mb-2">${i.name}</h4>
+                        <div class="space-y-1">
+                            <div class="flex items-center bg-slate-100 rounded-lg border border-slate-200">
+                                <span class="text-[8px] font-black px-2 text-slate-400">QTY</span>
+                                <input type="text" id="qty-prod-${idx}" placeholder="e.g. 2kg" class="w-full bg-transparent p-1.5 text-[10px] font-bold outline-none">
+                            </div>
+                            <button onclick="addToCart('prod-${idx}', '${i.name.replace(/'/g, "\\'")}')" class="w-full bg-navy text-gold py-2 rounded-lg text-[10px] font-black uppercase">Add to List</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setCategory(c) { activeCat = c; render(); }
+        loadData();
+    </script>
+</body>
+</html>
