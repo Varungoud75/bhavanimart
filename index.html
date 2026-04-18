@@ -95,12 +95,11 @@
 </div>
     </div>
 
-    <div class="bg-navy p-4 border-y border-white/10 shadow-2xl sticky top-[60px] z-40">
-        <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search 10,000+ items..." 
-               class="w-full bg-white p-3 rounded-xl border border-white/20 text-navy text-sm mb-3 outline-none focus:border-gold font-bold">
-        <div class="flex gap-2 overflow-x-auto no-scrollbar" id="catFilters">
-            <button onclick="setCategory('all')" class="bg-gold text-navy px-5 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap">All Items</button>
-        </div>
+   <div class="bg-white sticky top-[80px] z-40 border-b p-4 shadow-md text-center"> 
+    <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search 10,000+ items..." class="w-full bg-slate-100 p-4 rounded-xl border-2 border-slate-200 text-sm mb-4 outline-none focus:border-navy font-bold text-navy"> 
+    
+    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2" id="catFilters"></div> 
+</div>
     </div>
     <div class="bg-navy p-4 border-y border-white/10">
         <div class="flex gap-2 overflow-x-auto no-scrollbar" id="catFilters">
@@ -236,19 +235,47 @@
             window.location.href = `https://wa.me/919182841682?text=${encodeURIComponent(msg)}`;
         }
 
-        function generateCategoryButtons() {
-            const cats = [...new Set(allItems.map(i => i.category))].filter(c => !c.includes('OFFER'));
-            const container = document.getElementById('catFilters');
-            cats.forEach(c => {
-                const btn = document.createElement('button');
-                btn.className = "bg-white/10 text-white border border-white/20 px-4 py-1.5 rounded-lg text-[9px] font-black uppercase whitespace-nowrap";
-                btn.innerText = c;
-                btn.onclick = (e) => {
-                    activeCat = c;
-                    document.querySelectorAll('#catFilters button').forEach(b => b.classList.replace('bg-gold', 'bg-white/10'));
-                    e.target.classList.replace('bg-white/10', 'bg-gold');
-                    render();
-                };
+       function generateCategoryButtons() {
+    const container = document.getElementById('catFilters');
+    // Clear the container first to prevent duplicates
+    container.innerHTML = ''; 
+
+    // 1. Create the initial 'All Items' button dynamically
+    const allBtn = document.createElement('button');
+    allBtn.innerText = "ALL ITEMS";
+    allBtn.className = "bg-navy text-gold px-6 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap active-cat"; // Added active class by default
+    allBtn.onclick = (e) => filterByCategory('all', e.target);
+    container.appendChild(allBtn);
+
+    // 2. Create buttons for other categories found in your sheet
+    const cats = [...new Set(allItems.map(i => i.category))];
+    cats.forEach(c => {
+        if(c && c !== 'all') {
+            const btn = document.createElement('button');
+            btn.className = "bg-slate-100 text-navy border border-slate-200 px-6 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap";
+            btn.innerText = c;
+            btn.onclick = (e) => filterByCategory(c, e.target);
+            container.appendChild(btn);
+        }
+    });
+}
+
+// Helper function to handle the filter and the button colors
+function filterByCategory(cat, element) {
+    activeCat = cat;
+    
+    // Reset all buttons to default grey style
+    document.querySelectorAll('#catFilters button').forEach(b => {
+        b.classList.remove('bg-navy', 'text-gold');
+        b.classList.add('bg-slate-100', 'text-navy');
+    });
+
+    // Set clicked button to navy/gold style
+    element.classList.remove('bg-slate-100', 'text-navy');
+    element.classList.add('bg-navy', 'text-gold');
+
+    render(); // Re-run the grid display
+}
                 container.appendChild(btn);
             });
         }
