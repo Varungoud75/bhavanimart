@@ -60,9 +60,9 @@
                 <h1 class="font-[900] text-xl leading-none uppercase tracking-widest">
                     <span class="text-gold">BHAVANI</span> <span class="text-white">MART</span>
                 </h1>
-                <div class="mt-2">
-                    <p class="text-[9px] font-bold text-white/80 uppercase tracking-widest mb-1">+91 9182841682</p>
-                    <a href="https://maps.google.com" target="_blank" class="inline-flex items-center bg-white text-navy px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-tighter shadow-sm">
+                <div class="flex items-center gap-2 mt-1">
+                    <p class="text-[9px] font-bold text-white/80 uppercase tracking-widest">+91 9182841682</p>
+                    <a href="https://maps.google.com" target="_blank" class="inline-flex items-center bg-white text-navy px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter shadow-sm">
                         <span class="mr-1">📍</span> VISIT STORE
                     </a>
                 </div>
@@ -136,7 +136,8 @@
                         category: parts[0]?.replace(/"/g, '').trim().toUpperCase() || 'GENERAL', 
                         name: parts[1]?.replace(/"/g, '').trim() || '',
                         img: parts[2]?.replace(/"/g, '').trim() || '',
-                        price: parts[3]?.replace(/"/g, '').trim() || '' // Price is usually the 4th column
+                        price: parts[3]?.replace(/"/g, '').trim() || '',
+                        mrp: parts[4]?.replace(/"/g, '').trim() || ''
                     };
                 }).filter(i => i.name.length > 1);
                 generateCategoryButtons();
@@ -156,7 +157,10 @@
                     <div class="min-w-[130px] bg-white rounded-xl p-2 shadow-md text-navy">
                         <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="h-14 mx-auto object-contain">
                         <h4 class="text-[9px] font-black uppercase text-center mt-1 h-6 overflow-hidden">${i.name}</h4>
-                        <p class="text-center text-[10px] font-black text-red-600 mb-1">${i.price ? '₹' + i.price : ''}</p>
+                        <div class="text-center mb-1">
+                            <span class="text-[10px] font-black text-red-600">₹${i.price}</span>
+                            <span class="text-[8px] text-slate-400 line-through ml-1">₹${i.mrp}</span>
+                        </div>
                         <button onclick="addToCart('off-${idx}', '${i.name}')" class="w-full bg-red-600 text-white py-1 rounded text-[8px] font-black uppercase">Add</button>
                     </div>
                 `).join('');
@@ -164,8 +168,9 @@
         }
 
         function addToCart(id, name) {
+            const isOffer = id.startsWith('off');
             const qtyInput = document.getElementById(`qty-prod-${id.split('-')[1]}`);
-            const qtyVal = qtyInput ? (qtyInput.value || "1 unit") : "1 unit";
+            const qtyVal = (!isOffer && qtyInput) ? (qtyInput.value || "1 unit") : "1 unit";
             cart.push({ name: name, qty: qtyVal });
             localStorage.setItem('bhavaniCart', JSON.stringify(cart));
             updateCart();
@@ -214,7 +219,7 @@
                     <div class="text-center">
                         <p class="text-[7px] font-bold text-blue-600 uppercase mb-0.5">${i.category}</p>
                         <h4 class="text-[10px] font-[900] uppercase h-7 overflow-hidden leading-tight mb-1">${i.name}</h4>
-                        <p class="text-[11px] font-black text-navy mb-2">${i.price ? '₹' + i.price : 'Ask Store'}</p>
+                        <p class="text-[11px] font-black text-navy mb-2">₹${i.price}</p>
                         <div class="space-y-1">
                             <div class="flex items-center bg-slate-100 rounded border border-slate-200">
                                 <span class="text-[8px] font-black px-1.5 text-slate-400">QTY</span>
