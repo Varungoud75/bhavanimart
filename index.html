@@ -73,29 +73,40 @@
 
     <section class="bg-navy py-6 px-4 text-center">
         <h2 class="text-2xl font-[900] text-gold uppercase mb-6 tracking-tighter">BHAVANI HYPER MART</h2>
-        
-        <div class="search-container">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search items..." class="search-input">
-        </div>
 
-        <div class="p-4 text-center space-y-3 max-w-md mx-auto">
-    <h3 class="text-white font-black text-sm uppercase">TIRED OF TYPING? TAKE A PHOTO OF YOUR LIST!</h3>
-    <a href="https://wa.me/919182841682" class="w-full bg-gold text-navy py-3 rounded-full text-[11px] font-[900] flex items-center justify-center gap-2 uppercase shadow-lg">
-        📸 WHATSAPP LIST PHOTO
-    </a>
+        <p class="text-lg md:text-xl font-black text-white tracking-[0.2em] uppercase"> 
+
+            3000 SQ. FT. WHOLESALE STORE 
+
+        </p>
+        <div class="bg-navy p-14 text-center border-y-4 border-gold"> 
+
+        <h3 class="text-gold font-black text-2xl md:text-4xl mb-8 uppercase tracking-tight leading-tight"> 
+
+            TIRED OF TYPING?<br> TAKE A PHOTO OF YOUR LIST! 
+
+        </h3> 
+
+        <a href="https://wa.me/919182841682?text=Hi%20Bhavani%20Mart,%20I%20have%20attached%20a%20photo%20of%20my%20grocery%20list." class="bg-gold text-navy px-12 py-5 rounded-full text-[16px] font-black inline-block shadow-2xl uppercase tracking-widest hover:scale-105 transition-transform"> 
+
+            WHATSAPP LIST PHOTO 
     <a href="#" class="w-full bg-white text-navy py-3 rounded-full text-[11px] font-[900] flex items-center justify-center gap-2 uppercase border-2 border-gold shadow-lg">
         📍 GET DIRECTIONS
     </a>
 </div>
     </section>
 
-    <div class="bg-slate-50 min-h-screen">
-        <div class="p-3 overflow-x-auto no-scrollbar flex gap-2 sticky top-[72px] bg-slate-50 z-40 border-b shadow-sm" id="catFilters">
-            <button onclick="setCategory('all')" class="bg-navy text-gold px-4 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap">All Items</button>
-        </div>
+      <div class="bg-white sticky top-[88px] z-40 border-b p-4 shadow-md text-center"> 
+
+        <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search items (Rice, Soap, Oil...)" class="w-full bg-slate-100 p-4 rounded-xl border-2 border-slate-200 text-sm mb-4 outline-none focus:border-navy font-bold"> 
+
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2" id="catFilters"> 
+
+            <button onclick="setCategory('all')" class="bg-navy text-gold px-6 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap">All Items</button> 
+
+        </div> 
+
+    </div> 
 
         <main class="p-2 mb-24">
             <div id="productGrid" class="grid grid-cols-3 md:grid-cols-6 gap-2"></div>
