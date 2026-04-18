@@ -212,13 +212,29 @@
             const grid = document.getElementById('productGrid');
             const query = document.getElementById('itemSearch').value.toLowerCase();
             const filtered = allItems.filter(i => !i.category.includes('OFFER') && (activeCat === 'all' || i.category === activeCat) && i.name.toLowerCase().includes(query));
-            grid.innerHTML = filtered.map((i, idx) => `
+            
+            grid.innerHTML = filtered.map((i, idx) => {
+                // POINT 1: Price Splitting (Checks for / in your price column)
+                const prices = i.price.split('/');
+                const mrp = prices[0] ? prices[0].trim() : '';
+                const discountPrice = prices[1] ? prices[1].trim() : '';
+
+                return `
                 <div class="product-card p-2 flex flex-col justify-between border shadow-md">
                     <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="h-20 mx-auto object-contain mb-1">
                     <div class="text-center">
                         <p class="text-[7px] font-bold text-blue-600 uppercase mb-0.5">${i.category}</p>
                         <h4 class="text-[10px] font-[900] uppercase h-7 overflow-hidden leading-tight mb-1">${i.name}</h4>
-                        <p class="text-[11px] font-black text-navy mb-2">₹${i.price}</p>
+                        
+                        <div class="flex flex-col items-center mb-2">
+                            ${discountPrice ? `
+                                <span class="text-[11px] font-black text-navy leading-none">₹${discountPrice}</span>
+                                <span class="text-[8px] text-slate-300 line-through font-normal mt-0.5">₹${mrp}</span>
+                            ` : `
+                                <span class="text-[11px] font-black text-navy leading-none">₹${mrp}</span>
+                            `}
+                        </div>
+
                         <div class="space-y-1">
                             <div class="flex items-center bg-slate-100 rounded border border-slate-200">
                                 <span class="text-[8px] font-black px-1.5 text-slate-400">QTY</span>
@@ -228,7 +244,7 @@
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         function setCategory(c) { activeCat = c; render(); }
