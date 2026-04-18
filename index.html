@@ -14,20 +14,11 @@
         .bg-gold { background-color: #FFD700; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        .product-card { border-radius: 15px; background: white; color: #101D36; transition: 0.3s; }
-
         .hero-banner { 
             background: linear-gradient(rgba(16, 29, 54, 0.6), rgba(16, 29, 54, 0.6)), 
                         url('https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=2000&auto=format&fit=crop'); 
             background-size: cover; background-position: center;
         }
-
-        /* EXACT SEARCH BAR STYLE FROM PHOTO */
-        .search-container {
-            background: white; border-radius: 12px; display: flex; align-items: center;
-            padding: 0 14px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); max-width: 400px; margin: 0 auto;
-        }
-        .search-input { width: 100%; padding: 12px 10px; border: none; outline: none; color: #101D36; font-weight: 700; font-size: 14px; }
 
         .cart-drawer {
             position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100%;
@@ -48,66 +39,59 @@
 
     <div class="sticky top-0 z-50">
         <div class="bg-red-600 py-1.5 overflow-hidden border-b border-white/10">
-            <p class="animate-marquee text-white font-[900] text-[10px] uppercase tracking-tighter">
-                🔥 SPECIAL DISCOUNT ON EVERY ITEM! BELOW MRP! VISIT TODAY & SAVE BIG!🔥
+            <p class="animate-marquee text-white font-[900] text-[10px] uppercase">
+                🔥 SPECIAL DISCOUNT ON EVERY ITEM! VISIT TODAY & SAVE BIG! 🔥 HURRY! LIMITED TIME OFFERS! 🔥
             </p>
         </div>
 
-       <nav class="bg-navy p-4 flex justify-between items-center border-b border-gold/20">
-    <div>
-        <h1 class="font-[900] text-xl leading-none uppercase tracking-widest">
-            <span class="text-gold">BHAVANI</span> <span class="text-white">MART</span>
-        </h1>
-        <div class="flex items-center gap-2 mt-1">
-            <p class="text-[9px] font-bold text-white/80 uppercase tracking-widest">+91 9182841682</p>
-            <a href="https://maps.app.goo.gl/your-link-here" class="bg-white text-navy px-2 py-0.5 rounded flex items-center gap-1 text-[8px] font-[900] uppercase shadow-sm">
-                📍 VISIT STORE
-            </a>
-        </div>
-    </div>
-    <button onclick="toggleCart()" class="bg-green-600 text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase shadow-lg">CART</button>
-</nav>
+        <nav class="bg-navy p-4 flex justify-between items-center border-b border-gold/20">
+            <div>
+                <h1 class="font-[900] text-xl leading-none uppercase tracking-widest">
+                    <span class="text-gold">BHAVANI</span> <span class="text-white">MART</span>
+                </h1>
+                <div class="flex items-center gap-2 mt-1">
+                    <p class="text-[9px] font-bold text-white/80 uppercase tracking-widest">+91 9182841682</p>
+                    <a href="https://maps.google.com" class="bg-white text-navy px-2 py-0.5 rounded flex items-center gap-1 text-[8px] font-[900] uppercase shadow-sm">
+                        📍 VISIT STORE
+                    </a>
+                </div>
+            </div>
+            <button onclick="toggleCart()" class="bg-green-600 text-white px-3 py-1.5 rounded-md font-black text-[10px] uppercase shadow-lg">MY LIST</button>
+        </nav>
     </div>
 
-   <section class="hero-banner py-12 text-center text-white px-4">
-        <h2 class="text-3xl font-[900] text-gold uppercase tracking-tighter mb-1 leading-none">BHAVANI HYPER MART</h2>
-        <p class="text-[14px] font-black text-white tracking-[0.1em] uppercase">KARMANGHAT'S 3000 SQ. FT. WHOLESALE STORE</p>
+    <section class="hero-banner py-16 text-center text-white px-4">
+        <h2 class="text-5xl md:text-7xl font-[900] text-gold uppercase tracking-tighter mb-2 leading-none">
+            BHAVANI HYPER MART
+        </h2>
+        <p class="text-lg md:text-xl font-black text-white tracking-[0.2em] uppercase">
+            KARMANGHAT'S BIGGEST 3000 SQ. FT. WHOLESALE STORE
+        </p>
     </section>
 
-    <div id="offersSection" class="hidden bg-gold p-4 text-navy shadow-inner">
-        <h3 class="font-black text-xs uppercase mb-3 tracking-widest text-center border-b border-navy/20 pb-2">Today's Special Offers</h3>
-        <div id="offersGrid" class="flex gap-4 overflow-x-auto no-scrollbar pb-2"></div>
+    <div class="bg-navy p-10 text-center border-y-4 border-gold flex flex-col items-center"> 
+        <h3 class="text-gold font-black text-xl md:text-2xl mb-6 uppercase tracking-tight leading-tight"> 
+            TIRED OF TYPING?<br> TAKE A PHOTO OF YOUR LIST! 
+        </h3> 
+        
+        <a href="https://wa.me/919182841682?text=Hi%20Bhavani%20Mart,%20I%20am%20ordering%20the%20following%20items.%20I%20have%20attached%20a%20photo%20of%20my%20list." 
+           class="bg-gold text-navy w-full max-w-[300px] py-4 rounded-full text-[14px] font-[900] flex items-center justify-center gap-2 shadow-2xl uppercase tracking-widest hover:scale-105 transition-transform"> 
+            📸 WHATSAPP LIST PHOTO 
+        </a> 
+
+        <a href="https://maps.google.com" class="text-white underline text-[10px] font-bold uppercase tracking-widest mt-6 block">
+            📍 GET DIRECTIONS
+        </a>
+    </div> 
+
+    <div class="bg-white sticky top-[80px] z-40 border-b p-4 shadow-md text-center"> 
+        <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search 10,000+ items..." 
+               class="w-full bg-slate-100 p-4 rounded-xl border-2 border-slate-200 text-sm mb-4 outline-none focus:border-navy font-bold text-navy"> 
+        
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2" id="catFilters"></div> 
     </div>
 
-  <div class="bg-navy p-10 text-center border-y-4 border-gold flex flex-col items-center"> 
-    <h3 class="text-gold font-black text-xl md:text-2xl mb-6 uppercase tracking-tight leading-tight"> 
-        TIRED OF TYPING?<br> TAKE A PHOTO OF YOUR LIST! 
-    </h3> 
-    
-    <a href="https://wa.me/919182841682?text=Hi%20Bhavani%20Mart,%20I%20am%20ordering%20the%20following%20items.%20I%20have%20attached%20a%20photo%20of%20my%20list." 
-       class="bg-gold text-navy w-full max-w-[300px] py-4 rounded-full text-[14px] font-[900] flex items-center justify-center gap-2 shadow-2xl uppercase tracking-widest hover:scale-105 transition-transform"> 
-        📸 WHATSAPP LIST PHOTO 
-    </a> 
-
-    <a href="https://maps.app.goo.gl/your-link-here" class="text-white underline text-[10px] font-bold uppercase tracking-widest mt-6 block">
-        📍 GET DIRECTIONS
-    </a>
-</div>
-    </div>
-
-   <div class="bg-white sticky top-[80px] z-40 border-b p-4 shadow-md text-center"> 
-    <input type="text" id="itemSearch" onkeyup="render()" placeholder="Search 10,000+ items..." class="w-full bg-slate-100 p-4 rounded-xl border-2 border-slate-200 text-sm mb-4 outline-none focus:border-navy font-bold text-navy"> 
-    
-    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2" id="catFilters"></div> 
-</div>
-    </div>
-    <div class="bg-navy p-4 border-y border-white/10">
-        <div class="flex gap-2 overflow-x-auto no-scrollbar" id="catFilters">
-            <button onclick="setCategory('all')" class="bg-gold text-navy px-5 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap">All Items</button>
-        </div>
-    </div>
-
-    <main class="p-2 mb-24 mt-4">
+    <main class="p-2 mb-24 mt-4 bg-slate-50 min-h-screen">
         <div id="productGrid" class="grid grid-cols-3 md:grid-cols-6 gap-2"></div>
     </main>
 
@@ -129,7 +113,7 @@
     <script>
         const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQK4lAzDWObCjowN-SuMvzqFpz46ePH4kDCYBrdMCY3A1Uz2pv_ooVR8h2c8JNNpZmKxsSVaq7dDOQc/pub?gid=0&single=true&output=csv';
         let allItems = [];
-        let cart = JSON.parse(localStorage.getItem('bhavaniCart')) || [];
+        let cart = [];
         let activeCat = 'all';
 
         async function loadData() {
@@ -140,147 +124,111 @@
                 allItems = rows.map(r => {
                     const parts = r.split(',');
                     return { 
-                        category: (parts[0] || '').replace(/"/g, '').trim().toUpperCase() || 'GENERAL', 
+                        category: (parts[0] || '').replace(/"/g, '').trim(), 
                         name: (parts[1] || '').replace(/"/g, '').trim(),
                         img: (parts[2] || '').replace(/"/g, '').trim(),
                         price: (parts[3] || '').replace(/"/g, '').trim()
                     };
                 }).filter(i => i.name && i.name.length > 1);
                 generateCategoryButtons();
-                renderOffers();
-                updateCart();
                 render();
-            } catch (e) { console.error("Data error"); }
+            } catch (e) { console.error("Error loading data"); }
         }
 
-        function renderOffers() {
-            const offerItems = allItems.filter(i => i.category.includes('OFFER'));
-            const section = document.getElementById('offersSection');
-            const grid = document.getElementById('offersGrid');
-            if (offerItems.length > 0) {
-                section.classList.remove('hidden');
-                grid.innerHTML = offerItems.map((i, idx) => {
-                    const prices = i.price.split('/');
-                    const mrp = prices[0] ? prices[0].trim() : '';
-                    const disc = prices[1] ? prices[1].trim() : '';
-                    return `
-                        <div class="min-w-[130px] bg-white rounded-xl p-2 shadow-md text-navy flex flex-col">
-                            <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="h-16 mx-auto object-contain mb-1">
-                            <h4 class="text-[9px] font-black uppercase text-center h-6 overflow-hidden mb-1">${i.name}</h4>
-                            <div class="flex flex-col items-center mb-1">
-                                <span class="text-[11px] font-[900] leading-none">₹${disc || mrp}</span>
-                                ${disc ? `<span class="text-[8px] text-slate-400 line-through font-medium">₹${mrp}</span>` : ''}
-                            </div>
-                            <button onclick="addToCart('off-${idx}', '${i.name.replace(/'/g, "\\'")}', true)" class="w-full bg-red-600 text-white py-1.5 rounded-lg text-[9px] font-black uppercase">Add</button>
-                        </div>`;
-                }).join('');
-            }
+        function generateCategoryButtons() {
+            const container = document.getElementById('catFilters');
+            container.innerHTML = ''; 
+
+            const allBtn = document.createElement('button');
+            allBtn.innerText = "ALL ITEMS";
+            allBtn.className = "bg-navy text-gold px-6 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap";
+            allBtn.onclick = (e) => applyFilter('all', e.target);
+            container.appendChild(allBtn);
+
+            const cats = [...new Set(allItems.map(i => i.category.trim().toUpperCase()))];
+            cats.forEach(c => {
+                if (c && c !== 'ALL' && c !== 'GENERAL') {
+                    const btn = document.createElement('button');
+                    btn.className = "bg-slate-100 text-navy border border-slate-200 px-6 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap";
+                    btn.innerText = c;
+                    btn.onclick = (e) => applyFilter(c, e.target);
+                    container.appendChild(btn);
+                }
+            });
+        }
+
+        function applyFilter(category, element) {
+            activeCat = category;
+            document.querySelectorAll('#catFilters button').forEach(btn => {
+                btn.classList.remove('bg-navy', 'text-gold');
+                btn.classList.add('bg-slate-100', 'text-navy');
+            });
+            element.classList.remove('bg-slate-100', 'text-navy');
+            element.classList.add('bg-navy', 'text-gold');
+            render();
         }
 
         function render() {
             const grid = document.getElementById('productGrid');
             const query = document.getElementById('itemSearch').value.toLowerCase();
-            const filtered = allItems.filter(i => !i.category.includes('OFFER') && (activeCat === 'all' || i.category === activeCat) && i.name.toLowerCase().includes(query));
             
+            const filtered = allItems.filter(i => {
+                const matchesSearch = i.name.toLowerCase().includes(query);
+                const matchesCategory = (activeCat === 'all' || i.category.trim().toUpperCase() === activeCat.toUpperCase());
+                return matchesSearch && matchesCategory;
+            });
+
             grid.innerHTML = filtered.map((i, idx) => {
-                const prices = i.price.split('/');
-                const mrp = prices[0] ? prices[0].trim() : '';
+                const prices = i.price.includes('/') ? i.price.split('/') : [i.price, ''];
+                const mrp = prices[0].trim();
                 const disc = prices[1] ? prices[1].trim() : '';
+
                 return `
-                <div class="product-card p-2 flex flex-col border shadow-sm">
-                    <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="h-16 mx-auto object-contain mb-1">
+                <div class="bg-white rounded-xl p-2 flex flex-col border shadow-sm text-navy">
+                    <div class="h-16 flex items-center justify-center mb-1">
+                        <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="max-h-full object-contain">
+                    </div>
                     <h4 class="text-[9px] font-[900] uppercase h-6 overflow-hidden leading-tight mb-1">${i.name}</h4>
                     <div class="flex flex-col mb-1">
-                        <span class="text-[11px] font-black text-navy leading-none">₹${disc || mrp}</span>
+                        <span class="text-[11px] font-black leading-none">₹${disc || mrp}</span>
                         ${disc ? `<span class="text-[8px] text-slate-300 line-through font-normal">₹${mrp}</span>` : ''}
                     </div>
-                    <div class="space-y-1">
-                        <input type="text" id="qty-prod-${idx}" placeholder="Qty" class="w-full border border-slate-200 rounded p-1 text-[8px] font-bold outline-none text-navy">
-                        <button onclick="addToCart('prod-${idx}', '${i.name.replace(/'/g, "\\'")}', false)" class="w-full bg-navy text-gold py-1.5 rounded text-[8px] font-black uppercase">Add</button>
-                    </div>
+                    <input type="text" id="qty-${idx}" placeholder="Qty" class="w-full border border-slate-200 rounded p-1 text-[8px] font-bold outline-none mb-1">
+                    <button onclick="addToCart(${idx}, '${i.name.replace(/'/g, "\\'")}')" class="w-full bg-navy text-gold py-1.5 rounded text-[8px] font-black uppercase">Add</button>
                 </div>`;
             }).join('');
         }
 
-        function addToCart(id, name, isOffer) {
-            const qtyInput = document.getElementById(`qty-${id}`);
-            const qtyVal = isOffer ? "1 unit" : (qtyInput.value || "1 unit");
+        function addToCart(idx, name) {
+            const qtyInput = document.getElementById(`qty-${idx}`);
+            const qtyVal = qtyInput.value || "1 unit";
             cart.push({ name: name, qty: qtyVal });
-            localStorage.setItem('bhavaniCart', JSON.stringify(cart));
-            if(qtyInput) qtyInput.value = "";
-            updateCart();
-            
+            qtyInput.value = "";
+            document.getElementById('cartCount').innerText = cart.length;
+            updateCartList();
             const btn = event.target;
-            const oldTxt = btn.innerText;
             btn.innerText = "✓";
-            btn.classList.add('bg-green-600');
-            setTimeout(() => { btn.innerText = oldTxt; btn.classList.remove('bg-green-600'); }, 700);
+            setTimeout(() => { btn.innerText = "ADD"; }, 700);
         }
 
-        function updateCart() {
-            document.getElementById('cartCount').innerText = cart.length;
+        function updateCartList() {
             const container = document.getElementById('cartItems');
-            container.innerHTML = cart.length === 0 ? '<p class="text-center py-10 opacity-50 uppercase text-xs font-bold text-navy">Empty List</p>' : 
+            container.innerHTML = cart.length === 0 ? '<p class="text-center py-10 opacity-50 uppercase text-xs font-bold text-navy">Empty</p>' : 
             cart.map((item, index) => `
                 <div class="flex justify-between items-center bg-slate-100 p-2 rounded-lg border text-navy">
-                    <div class="text-[9px] font-black uppercase leading-tight">${item.name}<br><span class="text-blue-600 font-bold">Qty: ${item.qty}</span></div>
+                    <div class="text-[9px] font-black uppercase">${item.name} (${item.qty})</div>
                     <button onclick="removeItem(${index})" class="text-red-500 font-black px-2">✕</button>
                 </div>`).join('');
         }
 
-        function removeItem(index) { cart.splice(index, 1); localStorage.setItem('bhavaniCart', JSON.stringify(cart)); updateCart(); }
+        function removeItem(index) { cart.splice(index, 1); document.getElementById('cartCount').innerText = cart.length; updateCartList(); }
+        
         function sendOrder() {
             if (cart.length === 0) return;
-            let msg = "📦 *ORDER - BHAVANI MART*\n\n" + cart.map((item, i) => `${i+1}. *${item.name}* (${item.qty})`).join('\n');
+            let msg = "📦 *ORDER*\n\n" + cart.map((item, i) => `${i+1}. *${item.name}* (${item.qty})`).join('\n');
             window.location.href = `https://wa.me/919182841682?text=${encodeURIComponent(msg)}`;
         }
 
-       function generateCategoryButtons() {
-    const container = document.getElementById('catFilters');
-    // Clear the container first to prevent duplicates
-    container.innerHTML = ''; 
-
-    // 1. Create the initial 'All Items' button dynamically
-    const allBtn = document.createElement('button');
-    allBtn.innerText = "ALL ITEMS";
-    allBtn.className = "bg-navy text-gold px-6 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap active-cat"; // Added active class by default
-    allBtn.onclick = (e) => filterByCategory('all', e.target);
-    container.appendChild(allBtn);
-
-    // 2. Create buttons for other categories found in your sheet
-    const cats = [...new Set(allItems.map(i => i.category))];
-    cats.forEach(c => {
-        if(c && c !== 'all') {
-            const btn = document.createElement('button');
-            btn.className = "bg-slate-100 text-navy border border-slate-200 px-6 py-2 rounded-lg text-[10px] font-black uppercase whitespace-nowrap";
-            btn.innerText = c;
-            btn.onclick = (e) => filterByCategory(c, e.target);
-            container.appendChild(btn);
-        }
-    });
-}
-
-// Helper function to handle the filter and the button colors
-function filterByCategory(cat, element) {
-    activeCat = cat;
-    
-    // Reset all buttons to default grey style
-    document.querySelectorAll('#catFilters button').forEach(b => {
-        b.classList.remove('bg-navy', 'text-gold');
-        b.classList.add('bg-slate-100', 'text-navy');
-    });
-
-    // Set clicked button to navy/gold style
-    element.classList.remove('bg-slate-100', 'text-navy');
-    element.classList.add('bg-navy', 'text-gold');
-
-    render(); // Re-run the grid display
-}
-                container.appendChild(btn);
-            });
-        }
-
-        function setCategory(c) { activeCat = c; render(); }
         function toggleCart() { document.getElementById('cartDrawer').classList.toggle('open'); document.getElementById('cartOverlay').classList.toggle('show'); }
         loadData();
     </script>
