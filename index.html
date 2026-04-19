@@ -174,35 +174,38 @@
         }
 
         function render() {
-            const grid = document.getElementById('productGrid');
-            const query = document.getElementById('itemSearch').value.toLowerCase();
+    const grid = document.getElementById('productGrid');
+    const query = document.getElementById('itemSearch').value.toLowerCase();
+    
+    const filtered = allItems.filter(i => {
+        const matchesSearch = i.name.toLowerCase().includes(query);
+        const matchesCategory = (activeCat === 'all' || i.category.trim().toUpperCase() === activeCat.toUpperCase());
+        return matchesSearch && matchesCategory;
+    });
+
+    grid.innerHTML = filtered.map((i, idx) => {
+        const prices = i.price.includes('/') ? i.price.split('/') : [i.price, ''];
+        const mrp = prices[0].trim();
+        const disc = prices[1] ? prices[1].trim() : '';
+
+        return `
+        <div class="bg-white rounded-xl p-2 flex flex-col border shadow-sm text-navy">
+            <div class="h-16 flex items-center justify-center mb-1">
+                <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="max-h-full object-contain">
+            </div>
+            <h4 class="text-[9px] font-[900] uppercase h-6 overflow-hidden leading-tight mb-1">${i.name}</h4>
             
-            const filtered = allItems.filter(i => {
-                const matchesSearch = i.name.toLowerCase().includes(query);
-                const matchesCategory = (activeCat === 'all' || i.category.trim().toUpperCase() === activeCat.toUpperCase());
-                return matchesSearch && matchesCategory;
-            });
+            <div class="flex flex-col mb-1">
+                <span class="text-[12px] font-[900] text-green-700 leading-none">₹${disc || mrp}</span>
+                ${disc ? `<span class="text-[8px] text-slate-400 line-through font-medium">MRP ₹${mrp}</span>` : ''}
+            </div>
 
-            grid.innerHTML = filtered.map((i, idx) => {
-                const prices = i.price.includes('/') ? i.price.split('/') : [i.price, ''];
-                const mrp = prices[0].trim();
-                const disc = prices[1] ? prices[1].trim() : '';
+            <input type="text" id="qty-${idx}" placeholder="Qty" class="w-full border border-slate-200 rounded p-1 text-[8px] font-bold outline-none mb-1">
+            <button onclick="addToCart(${idx}, '${i.name.replace(/'/g, "\\'")}')" class="w-full bg-navy text-gold py-1.5 rounded text-[8px] font-black uppercase tracking-tighter">Add to List</button>
+        </div>`;
+    }).join('');
+}
 
-                return `
-                <div class="bg-white rounded-xl p-2 flex flex-col border shadow-sm text-navy">
-                    <div class="h-16 flex items-center justify-center mb-1">
-                        <img src="${i.img || 'https://cdn-icons-png.flaticon.com/512/3081/3081840.png'}" class="max-h-full object-contain">
-                    </div>
-                    <h4 class="text-[9px] font-[900] uppercase h-6 overflow-hidden leading-tight mb-1">${i.name}</h4>
-                    <div class="flex flex-col mb-1">
-                        <span class="text-[11px] font-black leading-none">₹${disc || mrp}</span>
-                        ${disc ? `<span class="text-[8px] text-slate-400 line-through font-normal">₹${mrp}</span>` : ''}
-                    </div>
-                    <input type="text" id="qty-${idx}" placeholder="Qty" class="w-full border border-slate-200 rounded p-1 text-[8px] font-bold outline-none mb-1">
-                    <button onclick="addToCart(${idx}, '${i.name.replace(/'/g, "\\'")}')" class="w-full bg-navy text-gold py-1.5 rounded text-[8px] font-black uppercase">Add</button>
-                </div>`;
-            }).join('');
-        }
 
         function addToCart(idx, name) {
             const qtyInput = document.getElementById(`qty-${idx}`);
